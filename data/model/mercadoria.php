@@ -16,7 +16,7 @@
         $this->titulo = $titulo;
         $this->descricao = $descricao;
         $this->desconto = $desconto;
-        $this->foto = $quantidade;
+        $this->foto = $foto;
         $this->quantidade = $quantidade;
     
     }
