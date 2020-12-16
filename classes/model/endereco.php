@@ -1,7 +1,7 @@
 <?php
+namespace Model;
 
-    class Endereco{
-
+    class EnderecoModel{
       public $id_enderenco;
       public $id_user;
       public $rua;
@@ -20,6 +20,19 @@
         $this->complemento = $complemento;
         $this->cidade = $cidade;
         $this->estado = $estado;
+    }
+
+    function toJson(){
+     $array = [
+      'rua' => $rua,
+      'bairro' => $bairro,
+      'numero' => $numero,
+      'complemento' => $complemento,
+      'cidade' => $cidade,
+      'estado' => $estado
+
+     ];
+     return json_encode($array);
     }
 }
 
