@@ -1,6 +1,5 @@
 <?php 
 namespace DB;
-
 class Conn{
     private static $conn;
 

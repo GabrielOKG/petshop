@@ -22,7 +22,7 @@ namespace Model;
         $this->estado = $estado;
     }
 
-    function toJson(){
+  function toJson(){
      $array = [
       'rua' => $rua,
       'bairro' => $bairro,
@@ -30,7 +30,6 @@ namespace Model;
       'complemento' => $complemento,
       'cidade' => $cidade,
       'estado' => $estado
-
      ];
      return json_encode($array);
     }
