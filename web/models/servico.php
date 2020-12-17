@@ -1,23 +1,19 @@
 <?php
-
+namespace Model;
     class Servico{
-
-      public $id;
-      public $titulo;
-      public $foto;
-      public $descricao;
-      public $preco;
     
+    private $pdo;
           
-    function __construct($id,$titulo,$foto,$descricao,$preco){
-        $this->id = $id;
-        $this->titulo= $titulo;
-        $this->foto = $foto;
-        $this->descricao = $descricao;
-        $this->preco = $preco;
+    function __construct($pdo){
+        $this->id = $pdo;
     }
 
-
+    function busca(){
+      //:TODO
+    }
+    function getServicos(){
+      //:TODO
+    }
 }
 
 ?>

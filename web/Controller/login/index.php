@@ -7,7 +7,7 @@ include_once '../../../DB/database.ini.php';
 require '../../../rotas.php'; 
 use Rota\Go;
 use Model\User;
-
+ 
 if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) && !empty($_POST['senha']))
 {
     $user = new User($pdo);
@@ -17,19 +17,13 @@ if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) &
         if(isset($_SESSION['id'])){
             header(Go::home('d'));
         }else{
-            header(Go::login('d'));
+            echo "<script language='javascript' type='text/javascript'>
+        alert('Email ou senha incorretos');window.location.href='". Go::login('l') ."';</script>";
         }
     }else{
-        header(Go::login('d'));
+        echo "<script language='javascript' type='text/javascript'>
+        alert('Email ou senha incorretos');window.location.href='". Go::login('l') ."';</script>";
     }
 }else{
-    echo 'não entrou';
+    header(Go::login('d'));
 }
-
-// header('location: ../../view/login/');
-?>
- <!-- if(isset($_SESSION['id'])){
-            header('location: ../../view/home/');
-        }else{
-            header('location: ../../view/login/');
-        } -->

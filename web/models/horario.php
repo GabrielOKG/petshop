@@ -1,19 +1,20 @@
 <?php
-
+namespace Model;
     class Horario{
-
-      public $id;
-      public $id_user;
-      public $id_servico;
-      public $data;
-      public $hora;  
+    
+    private $pdo;
           
-    function __construct($id,$id_user,$id_servico,$data,$hora){
-        $this->id = $id;
-        $this->id_user = $id_user;
-        $this->id_servico = $ide_servico;
-        $this->data = $data;
-        $this->hora = $hora; 
+    function __construct($pdo){
+        $this->id = $pdo;
+    }
+    function marcar(){
+      //:TODO
+    }
+    function desmarcar(){
+      //:TODO
+    }
+    function getHorarios(){
+      //:TODO
     }
 }
 

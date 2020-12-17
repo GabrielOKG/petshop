@@ -1,6 +1,6 @@
 <?php
 namespace Model;
-    class Mercadoria{
+    class Carrinhp{
     
     private $pdo;
           
@@ -8,12 +8,16 @@ namespace Model;
         $this->id = $pdo;
     }
 
-    function busca(){
+    function adicionar(){
       //:TODO
     }
-    function getMercadorias(){
+    function remover(){
       //:TODO
     }
+    function getAll(){
+      //:TODO
+    }
+    
 }
 
 ?>

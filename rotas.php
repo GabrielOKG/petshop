@@ -3,7 +3,6 @@ namespace Rota;
 
 class Go{
     public static function logout($p){
-       
        if($p == 'd')
          return 'location: ../../controller/login/logout.php';
        if($p == 'l')

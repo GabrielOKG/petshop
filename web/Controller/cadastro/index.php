@@ -1,7 +1,7 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já está aberta.
     session_start();  
-}  
+} 
 require '../../models/user.php';
 include_once '../../../DB/database.ini.php';
 require '../../../rotas.php'; 
@@ -32,7 +32,8 @@ if(isset($_POST['nome']) && !empty($_POST['nome']) && isset($_POST['sobrenome'])
             header(Go::login('d'));
         }
     }else{
-        header(Go::cadastro('d'));
+        echo "<script language='javascript' type='text/javascript'>
+        alert('Já existe uma conta com essas informações , tente fazer login');window.location.href='". Go::cadastro('l') ."';</script>";
     }
 }else{
    header(Go::cadastro('d')); 

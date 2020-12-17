@@ -9,7 +9,7 @@ namespace Model;
 
     function cadastrarUser($nome,$sobrenome,$nascimento,$sexo,$cpf,$email,$senha){
       // Verifica se o email já foi cadastrado
-      $sql = "SELECT email,senha,cpf FROM users WHERE email=:email AND senha=:senha AND cpf=:cpf";
+      $sql = "SELECT email,senha,cpf FROM cliente WHERE   email=:email AND senha=:senha OR cpf=:cpf ";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':email', $email);
       $stmt->bindValue(':senha', sha1($senha));
@@ -19,7 +19,7 @@ namespace Model;
         return false;
       }else{
         //prepara para inserir os valores
-        $sql = "INSERT INTO users(nome, sobrenome, cpf, sexo , nascimento, email, senha) VALUES(:nome,:sobrenome,:cpf,:sexo,:nascimento,:email,:senha)";
+        $sql = "INSERT INTO cliente(nome, sobrenome, cpf, sexo , nascimento, email, senha) VALUES(:nome,:sobrenome,:cpf,:sexo,:nascimento,:email,:senha)";
         $stmt = $this->pdo->prepare($sql);
         //passando os valores
         $stmt->bindValue(':nome', $nome);
@@ -36,7 +36,7 @@ namespace Model;
 
     function loginUser($email, $senha){
       // Verificando usuario , se email e senha estiverem corretos retorna o id,nome e sobrenome
-      $sql = "SELECT id,nome,sobrenome,sexo,nascimento,cpf,email FROM users WHERE email=:email AND senha=:senha";
+      $sql = "SELECT id,nome,sobrenome,sexo,nascimento,cpf,email FROM cliente WHERE email=:email AND senha=:senha";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':email', $email);
       $stmt->bindValue(':senha', sha1($senha));

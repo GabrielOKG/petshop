@@ -28,7 +28,9 @@ use Rota\Go;
 <a href="<?php echo Go::cadastro('l'); ?>">cadastro</a>
  <?php } ?>
     <br>
-<script>
-</script>
+<form action="#" method="GET">
+    <input type="search" name="busca" placeholder="O que você está procurando?">
+    <input type="submit" value="Pesquisar">
+</form>
 </body>
 </html>
