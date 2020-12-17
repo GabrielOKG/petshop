@@ -5,7 +5,7 @@ if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já 
 require '../../../rotas.php'; 
 use Rota\Go;
 if(isset($_SESSION['id'])){
-    header(Go::home());
+    header(Go::home('d'));
 }
 ?>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ if(isset($_SESSION['id'])){
     <title>Document</title>
 </head>
 <body>
-    <form action='<?php Go::loginController(); ?>' method="POST">
+    <form action='<?php echo Go::loginController(); ?>' method="POST">
     <input type="email" name="email" placeholder="Email">
     <br>
     <input type="password" name="senha" placeholder="Senha">

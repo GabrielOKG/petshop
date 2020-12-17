@@ -9,7 +9,6 @@ use Rota\Go;
 if(!isset($_SESSION['id'])){
     header(Go::login('d'));
 }
-$arr = User::formatar();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -20,22 +19,15 @@ $arr = User::formatar();
     <title>Petshop - Pagina Inicial</title>
 </head>
 <body>
-    <h1>Minha Conta</h1>
+    <h1>Endereço</h1>
     <a href="<?php echo Go::logout('l'); ?>">Logout</a>
     <br>
     <a href="<?php echo Go::home('l'); ?>">Home</a>
     <br>
-    <a href="<?php echo Go::endereco('l')?>">Endereço</a>
-    <br>
-    <a href="<?php echo Go::carrinho('l')?>">Carrinho</a>
-    <br>
-    <br>
-    <p><?php foreach($arr as $dado){
-      echo $dado . " <br>";  
-    }
-    ?></p>
-   
-    
+    <a href="<?php echo Go::conta('l'); ?>">Conta</a>
+    <h3>endereços Cadastrados</h3>
+    <p>Voce não possui nenhum endereco cadastrado</p><br>
+       
 <script>
 </script>
 </body>
