@@ -3,7 +3,6 @@
     session_start();  
   }  
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,6 +12,11 @@
     <title>Petshop - Pagina Inicial</title>
 </head>
 <body>
-   <h1>Olá <?php echo $_SESSION['nome'] .' ' . $_SESSION['sobrenome']; ?></h1> 
+   <?php  if(isset($_SESSION['id'])){?>
+    <h1>Bem vindo <?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome']; ?> </h1>
+  <?php }else{
+      echo 'Não logado';
+    }
+    ?>
 </body>
 </html>
