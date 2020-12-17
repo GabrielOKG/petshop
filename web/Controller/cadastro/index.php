@@ -1,6 +1,11 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já está aberta.
+    session_start();  
+}  
 require '../../models/user.php';
 include_once '../../../DB/database.ini.php';
+require '../../../rotas.php'; 
+use Rota\Go;
 use Model\User;
 if(isset($_POST['nome']) && !empty($_POST['nome']) && isset($_POST['sobrenome']) && !empty($_POST['sobrenome'])
 && isset($_POST['nascimento']) && !empty($_POST['nascimento']) && isset($_POST['sexo']) && !empty($_POST['sexo'])
@@ -17,10 +22,20 @@ if(isset($_POST['nome']) && !empty($_POST['nome']) && isset($_POST['sobrenome'])
 
 
     if($user->cadastrarUser($nome,$sobrenome,$nascimento,$sexo,$cpf,$email,$senha) == true){
-        header('location: ../../view/cadastro/');
+        if($user->loginUser($email,$senha) == true){
+            if(isset($_SESSION['id'])){
+                header(Go::home('d'));
+            }else{
+                header(Go::login('d'));
+            }
+        }else{
+            header(Go::login('d'));
+        }
     }else{
-        header('location: ../../view/cadastro/');
+        header(Go::cadastro('d'));
     }
+}else{
+   header(Go::cadastro('d')); 
 }
 
-header('location: ../../view/cadastro/');
+

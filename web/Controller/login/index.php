@@ -4,6 +4,8 @@ if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já 
 }  
 require '../../models/user.php';
 include_once '../../../DB/database.ini.php';
+require '../../../rotas.php'; 
+use Rota\Go;
 use Model\User;
 
 if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) && !empty($_POST['senha']))
@@ -13,12 +15,12 @@ if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) &
     $senha = $_POST['senha'];
     if($user->loginUser($email,$senha) == true){
         if(isset($_SESSION['id'])){
-            header('location: ../../view/home/');
+            header(Go::home('d'));
         }else{
-            header('location: ../../view/login/');
+            header(Go::login('d'));
         }
     }else{
-        header('location: ../../view/login/');
+        header(Go::login('d'));
     }
 }else{
     echo 'não entrou';

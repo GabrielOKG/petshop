@@ -1,10 +1,13 @@
 <?php 
 if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já está aberta.
     session_start();  
-    if(isset($_SESSION['id'])){
-        header('location: ../../view/home/');
-    }
-}  
+  
+} 
+require '../../../rotas.php'; 
+use Rota\Go;
+if(isset($_SESSION['id'])){
+    header(Go::home());
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -14,7 +17,7 @@ if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já 
     <title>Document</title>
 </head>
 <body>
-    <form action='../../controller/cadastro/' method="POST">
+    <form action='<?php Go::cadastroController(); ?>' method="POST">
     <input type="text" name="nome" placeholder="Nome">
     <input type="text" name="sobrenome" placeholder="Sobrenome">
     <br>

@@ -51,6 +51,7 @@ namespace Model;
         $_SESSION['nascimento'] = $dado['nascimento'];
         $_SESSION['cpf'] = $dado['cpf'];
         $_SESSION['email'] = $dado['email'];
+
         return true;
       }else{
         return false;

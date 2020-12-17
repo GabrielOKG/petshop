@@ -4,6 +4,9 @@
   } 
 require '../../../rotas.php'; 
 use Rota\Go;
+if(!isset($_SESSION['id'])){
+    header(Go::login());
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,10 +19,10 @@ use Rota\Go;
 <body>
 <?php  if(isset($_SESSION['id'])){?>
 <!-- Se o usuario estiver logado aparece isso -->
-    <h1>Bem vindo <?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome']; ?> </h1>
-    <a href="<?php echo Go::logout('l'); ?>">Logout</a><br>
-    <a href="<?php echo Go::conta('l'); ?>">Minha conta</a><br>
-    <a href="<?php echo Go::carrinho('l'); ?>">Meu Carrinho</a><br>
+    <h1>Minha Conta</h1>
+    <a href="<?php echo Go::logout('l'); ?>">Logout</a>
+    <br>
+    <a href="<?php echo Go::home('l'); ?>">Home</a>
   <?php }else{ ?>
 <!-- Se não isso -->
 <h1> Não Logado </h1>
