@@ -27,16 +27,4 @@ if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) &
 }else{
     header(Go::login('d'));
 }
-<<<<<<< HEAD
 
-        
-
-// header('location: ../../view/login/');
-?>
- <!-- if(isset($_SESSION['id'])){
-            header('location: ../../view/home/');
-        }else{
-            header('location: ../../view/login/');
-        } -->
-=======
->>>>>>> 83efd40ed201e93d44325106b6040eab887033a4
