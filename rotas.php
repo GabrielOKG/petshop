@@ -2,35 +2,55 @@
 namespace Rota;
 
 class Go{
-    public static function logout($p){
-       if($p == 'd')
-         return 'location: ../../controller/login/logout.php';
-       if($p == 'l')
-         return '../../controller/login/logout.php';
+    public static function UserController($param){
+      switch($param){
+        case "cadastro/d":
+          return 'location: ../../view/cadastro/';
+        break;
+        case "cadastro/l":
+          return '../../view/cadastro/';
+        break;
+        case "cadastroController":
+          return '../../controller/auth/cadastro.php';
+        case "login/d": 
+          return 'location: ../../view/login/';
+        break;
+        case "login/l": 
+          return '../../view/login/';
+        break;
+        case "loginController":
+          return '../../controller/auth/login.php';
+        break;
+        // case "atualizar/d": 
+        // break;
+        // case "atualizar/l": 
+        // break;
+        case "logout": 
+          return '../../controller/auth/logout.php';
+        break;
+      }
+    }
+    public static function ContaController($param){
+        switch($param){
+          case "endereco/novo": 
+            return '../../controller/endereco/novo.php';
+          break;
+          case "endereco/deletar": 
+          return '../../controller/endereco/delete.php';
+          break;
+          case "endereco/atualizar": 
+          return '../../controller/endereco/atualiza.php';
+          break;
+          case "endereco/mostrarTodos": 
+          return '../../controller/endereco/endereco.php';
+          break;
+        }
     }
     public static function home($p){
        if($p == 'd')
          return 'location: ../../view/home/';
        if($p == 'l')
          return '../../view/home/';
-     }
-     public static function login($p){
-        if($p == 'd')
-          return 'location: ../../view/login/';
-        if($p == 'l')
-          return '../../view/login/';
-      }
-      public static function loginController(){
-          return '../../controller/login/';
-     }
-      public static function cadastro($p){
-        if($p == 'd')
-          return 'location: ../../view/cadastro/';
-        if($p == 'l')
-          return '../../view/cadastro/';
-      }
-      public static function cadastroController(){
-          return '../../controller/cadastro/';
      }
       public static function conta($p){
         if($p == 'd')

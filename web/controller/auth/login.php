@@ -18,13 +18,16 @@ if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) &
             header(Go::home('d'));
         }else{
             echo "<script language='javascript' type='text/javascript'>
-        alert('Email ou senha incorretos');window.location.href='". Go::login('l') ."';</script>";
+        alert('Email ou senha incorretos');window.location.href='". Go::UserController('login/l') ."';</script>";
         }
     }else{
         echo "<script language='javascript' type='text/javascript'>
-        alert('Email ou senha incorretos');window.location.href='". Go::login('l') ."';</script>";
+        alert('Email ou senha incorretos');window.location.href='". Go::UserController('login/l') ."';</script>";
     }
 }else{
-    header(Go::login('d'));
+    header(Go::UserController('login/d'));
 }
+<<<<<<< HEAD:web/Controller/login/index.php
 
+=======
+>>>>>>> ba0f08215e161b1d50de3158e85c92ad69090614:web/controller/auth/login.php

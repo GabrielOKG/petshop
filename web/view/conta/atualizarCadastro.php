@@ -17,17 +17,13 @@ if(!isset($_SESSION['id'])){
     <title>Document</title>
 </head>
 <body>
-    <form action='<?php echo Go::UserController('ac'); ?>' method="POST">
+    <form action='<?php echo Go::UserController('atualizarController'); ?>' method="POST">
     <input type="text" name="nome" placeholder="Nome">
     <input type="text" name="sobrenome" placeholder="Sobrenome">
-    <br>
-    <input type="date" name="nascimento" placeholder="Nascimento">
     <br>
     <input type="email" name="email" placeholder="Email">
     <br>
     <input type="password" name="senha" placeholder="Digite a senha atual">
-    <br>
-    <input type="password" name="senha" placeholder="Digite a nova senha">
     <input type="submit" value="Atualizar">
     </form>
 </body>

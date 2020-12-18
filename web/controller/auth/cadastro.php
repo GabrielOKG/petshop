@@ -26,14 +26,14 @@ if(isset($_POST['nome']) && !empty($_POST['nome']) && isset($_POST['sobrenome'])
             if(isset($_SESSION['id'])){
                 header(Go::home('d'));
             }else{
-                header(Go::login('d'));
+                header(Go::UserController('login/d'));
             }
         }else{
-            header(Go::login('d'));
+            header(Go::UserController('login/d'));
         }
     }else{
         echo "<script language='javascript' type='text/javascript'>
-        alert('Já existe uma conta com essas informações , tente fazer login');window.location.href='". Go::cadastro('l') ."';</script>";
+        alert('Já existe uma conta com essas informações , tente fazer login');window.location.href='". Go::UserController('cadastro/l') ."';</script>";
     }
 }else{
    header(Go::cadastro('d')); 

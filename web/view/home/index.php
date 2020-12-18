@@ -53,15 +53,15 @@ use Rota\Go;
   </div>
 </nav>
     <h1>Bem vindo <?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome']; ?> </h1>
-    <a href="<?php echo Go::logout('l'); ?>">Logout</a><br>
+    <a href="<?php echo Go::UserController('logout'); ?>">Logout</a><br>
     <a href="<?php echo Go::conta('l'); ?>">Minha conta</a><br>
     <a href="<?php echo Go::carrinho('l'); ?>">Meu Carrinho</a><br>
   <?php }else{ ?>
 <!-- Se não isso -->
 <h1> Não Logado </h1>
-<a href="<?php echo Go::login('l'); ?>">Login</a>
+<a href="<?php echo Go::UserController('login/l'); ?>">Login</a>
 <br>
-<a href="<?php echo Go::cadastro('l'); ?>">cadastro</a>
+<a href="<?php echo Go::UserController('cadastro/l'); ?>">cadastro</a>
  <?php } ?>
     <br>
 <form action="#" method="GET">

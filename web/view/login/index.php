@@ -16,7 +16,7 @@ if(isset($_SESSION['id'])){
     <title>Document</title>
 </head>
 <body>
-    <form action='<?php echo Go::loginController(); ?>' method="POST">
+    <form action='<?php echo Go::UserController('loginController'); ?>' method="POST">
     <input type="email" name="email" placeholder="Email">
     <br>
     <input type="password" name="senha" placeholder="Senha">
