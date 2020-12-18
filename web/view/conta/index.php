@@ -7,7 +7,7 @@ require '../../models/user.php';
 use Model\User;
 use Rota\Go;
 if(!isset($_SESSION['id'])){
-    header(Go::login('d'));
+    header(Go::UserController('login/d'));
 }
 $arr = User::formatar();
 ?>
@@ -21,7 +21,7 @@ $arr = User::formatar();
 </head>
 <body>
     <h1>Minha Conta</h1>
-    <a href="<?php echo Go::logout('l'); ?>">Logout</a>
+    <a href="<?php echo Go::UserController('logout'); ?>">Logout</a>
     <br>
     <a href="<?php echo Go::home('l'); ?>">Home</a>
     <br>

@@ -3,12 +3,14 @@ if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já 
     session_start();  
   } 
 require '../../../rotas.php'; 
-require '../../models/user.php';
-use Model\User;
 use Rota\Go;
 if(!isset($_SESSION['id'])){
-    header(Go::login('d'));
+    header(Go::UserController('login/d'));
 }
+include_once '../../../DB/database.ini.php';
+include Go::ContaController('endereco/mostrarTodos');
+
+$enderecos = mostrarTodos($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -20,15 +22,20 @@ if(!isset($_SESSION['id'])){
 </head>
 <body>
     <h1>Endereço</h1>
-    <a href="<?php echo Go::logout('l'); ?>">Logout</a>
+    <a href="<?php echo Go::UserController('logout'); ?>">Logout</a>
     <br>
     <a href="<?php echo Go::home('l'); ?>">Home</a>
     <br>
     <a href="<?php echo Go::conta('l'); ?>">Conta</a>
     <h3>endereços Cadastrados</h3>
-    <p>Voce não possui nenhum endereco cadastrado</p><br>
-       
+    <?php if($enderecos == false) { ?><p>Voce não possui nenhum endereco cadastrado</p><br>
+    <a href="novo.php">Novo endereco</a>
+    <?php }else{ 
+        foreach($enderecos as $dado){
+        echo $dado . "<br>";
+    } ?>  <?php } ?>
 <script>
 </script>
 </body>
 </html>
+

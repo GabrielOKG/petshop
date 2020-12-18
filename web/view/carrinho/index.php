@@ -5,7 +5,7 @@ if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já 
 require '../../../rotas.php'; 
 use Rota\Go;
 if(!isset($_SESSION['id'])){
-    header(Go::login('d'));
+    header(Go::UserController('login/d'));
 }
 
 
@@ -22,7 +22,7 @@ if(!isset($_SESSION['id'])){
 
 <!-- Se o usuario estiver logado aparece isso -->
     <h1>Meu carrinho</h1>
-    <a href="<?php echo Go::logout('l'); ?>">Logout</a><br>
+    <a href="<?php echo Go::UserController('logout'); ?>">Logout</a><br>
     <a href="<?php echo Go::home('l'); ?>">Home</a>
 </body>
 </html>

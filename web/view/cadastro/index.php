@@ -17,7 +17,7 @@ if(isset($_SESSION['id'])){
     <title>Document</title>
 </head>
 <body>
-    <form action='<?php echo Go::cadastroController(); ?>' method="POST">
+    <form action='<?php echo Go::UserController('cadastroCotroller'); ?>' method="POST">
     <input type="text" name="nome" placeholder="Nome">
     <input type="text" name="sobrenome" placeholder="Sobrenome">
     <br>
