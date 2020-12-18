@@ -5,7 +5,7 @@ if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já 
 } 
 require '../../../rotas.php'; 
 use Rota\Go;
-if(isset($_SESSION['id'])){
+if(!isset($_SESSION['id'])){
     header(Go::home());
 }
 ?>
@@ -17,18 +17,18 @@ if(isset($_SESSION['id'])){
     <title>Document</title>
 </head>
 <body>
-    <form action='<?php echo Go::cadastroController(); ?>' method="POST">
+    <form action='<?php echo Go::UserController('ac'); ?>' method="POST">
     <input type="text" name="nome" placeholder="Nome">
     <input type="text" name="sobrenome" placeholder="Sobrenome">
     <br>
     <input type="date" name="nascimento" placeholder="Nascimento">
-    <input type="text" name="sexo" placeholder="Sexo">
     <br>
-    <input type="number" name="cpf" placeholder="Cpf">
     <input type="email" name="email" placeholder="Email">
     <br>
-    <input type="password" name="senha" placeholder="Senha">
-    <input type="submit" value="Cadastrar">
+    <input type="password" name="senha" placeholder="Digite a senha atual">
+    <br>
+    <input type="password" name="senha" placeholder="Digite a nova senha">
+    <input type="submit" value="Atualizar">
     </form>
 </body>
 </html>

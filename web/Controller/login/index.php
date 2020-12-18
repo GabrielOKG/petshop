@@ -4,8 +4,10 @@ if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já 
 }  
 require '../../models/user.php';
 include_once '../../../DB/database.ini.php';
+require '../../../rotas.php'; 
+use Rota\Go;
 use Model\User;
-
+ 
 if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) && !empty($_POST['senha']))
 {
     $user = new User($pdo);
@@ -13,16 +15,19 @@ if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) &
     $senha = $_POST['senha'];
     if($user->loginUser($email,$senha) == true){
         if(isset($_SESSION['id'])){
-            header('location: ../../view/home/');
+            header(Go::home('d'));
         }else{
-            header('location: ../../view/login/');
+            echo "<script language='javascript' type='text/javascript'>
+        alert('Email ou senha incorretos');window.location.href='". Go::login('l') ."';</script>";
         }
     }else{
-        header('location: ../../view/login/');
+        echo "<script language='javascript' type='text/javascript'>
+        alert('Email ou senha incorretos');window.location.href='". Go::login('l') ."';</script>";
     }
 }else{
-    echo 'não entrou';
+    header(Go::login('d'));
 }
+<<<<<<< HEAD
 
         
 
@@ -33,3 +38,5 @@ if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) &
         }else{
             header('location: ../../view/login/');
         } -->
+=======
+>>>>>>> 83efd40ed201e93d44325106b6040eab887033a4

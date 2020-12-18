@@ -1,10 +1,12 @@
 <?php 
 if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já está aberta.
     session_start();  
-    if(isset($_SESSION['id'])){
-        header('location: ../../view/home/');
-    }
-}  
+} 
+require '../../../rotas.php'; 
+use Rota\Go;
+if(isset($_SESSION['id'])){
+    header(Go::home('d'));
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -14,7 +16,7 @@ if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já 
     <title>Document</title>
 </head>
 <body>
-    <form action='../../controller/login/' method="POST">
+    <form action='<?php echo Go::loginController(); ?>' method="POST">
     <input type="email" name="email" placeholder="Email">
     <br>
     <input type="password" name="senha" placeholder="Senha">
