@@ -27,3 +27,7 @@ if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) &
 }else{
     header(Go::UserController('login/d'));
 }
+<<<<<<< HEAD:web/Controller/login/index.php
+
+=======
+>>>>>>> ba0f08215e161b1d50de3158e85c92ad69090614:web/controller/auth/login.php
