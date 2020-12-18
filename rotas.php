@@ -10,8 +10,8 @@ class Go{
         case "cadastro/l":
           return '../../view/cadastro/';
         break;
-        case "cadastroController":
-          '../../controller/auth/cadastro.php';
+        case "cadastroController": 
+         return '../../controller/auth/cadastro.php';
         break;
         case "login/d": 
           return 'location: ../../view/login/';
