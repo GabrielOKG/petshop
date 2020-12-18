@@ -24,6 +24,8 @@ if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) &
     echo 'não entrou';
 }
 
+        
+
 // header('location: ../../view/login/');
 ?>
  <!-- if(isset($_SESSION['id'])){
