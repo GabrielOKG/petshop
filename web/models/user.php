@@ -8,7 +8,7 @@ namespace Model;
 
     function cadastrarUser($nome,$sobrenome,$nascimento,$sexo,$cpf,$email,$senha){
       // Verifica se o email já foi cadastrado
-      $sql = "SELECT email,senha,cpf FROM cliente WHERE   email=:email AND senha=:senha OR cpf=:cpf ";
+      $sql = "SELECT email,senha,cpf FROM cliente WHERE   email=:email AND senha=:senha OR cpf=:cpf";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':email', $email);
       $stmt->bindValue(':senha', sha1($senha));
@@ -55,7 +55,9 @@ namespace Model;
         return false;
       }
     }
-
+    function atualizarCadastro(){
+      //:TODO
+    }
     static function formatar(){
       //formatando data de nascimento
       $data = date('d/m/Y', strtotime($_SESSION['nascimento']));
