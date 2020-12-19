@@ -3,11 +3,12 @@ include_once 'database.ini.php';
     $foto = "https://petshopuft.s3-sa-east-1.amazonaws.com/Img/".trim($_GET['foto']).".jpg";
     try{        
         $sql = "INSERT INTO produto(
-            titulo,descricao,preco,foto,qtd,categoria,indicacao,idade,tipo_racao,sabor,linha,marcar,desconto
-        )VALUES(:titulo,:descricao,:preco,:foto,:qtd,:categoria,:indicacao,:idade,:tipo_racao,:sabor,:linha,:marca,:desconto)";
+            titulo,descricao,preco,foto,qtd,categoria,indicacao,idade,tipo_racao,sabor,linha,marca,desconto,detalhes
+        )VALUES(:titulo,:descricao,:preco,:foto,:qtd,:categoria,:indicacao,:idade,:tipo_racao,:sabor,:linha,:marca,:desconto,:detalhes)";
         $stmt = $pdo->prepare($sql);
         $stmt->BindValue(':titulo',$_GET['titulo']);
         $stmt->BindValue(':descricao',$_GET['descricao']);
+        $stmt->BindValue(':detalhes',$_GET['detalhes']);
         $stmt->BindValue(':preco',$_GET['preco']);
         $stmt->BindValue(':foto',$foto);
         $stmt->BindValue(':qtd',$_GET['qtd']);

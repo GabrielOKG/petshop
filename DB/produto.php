@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualiza endereço</title>
+    <title>Cadastro de produto</title>
 </head>
 <body>
     <form action='cadastrar.php' method="GET">
     <input type="text" name="titulo" placeholder="titulo">
     <input type="textarea" name="descricao" placeholder="descricao">
+    <br>
+    <textarea  name="detalhes" placeholder="detalhes">
     <br>
     <input type="text" name="preco" step="0.1" placeholder="preco">
     <input type="text" name="foto" placeholder="foto">
