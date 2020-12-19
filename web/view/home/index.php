@@ -8,17 +8,20 @@ include_once '../../../DB/database.ini.php';
 include Go::ProdutoController('produto/exibir');
 if(isset($_GET['busca']) && !empty($_GET['busca'])){
 $busca = $_GET['busca'];
-// $page = $_GET['page'];
 }else{
-$busca = '';
-// $page = 1;
-// $lim = $page * 10;
-// $offset = 0;
+  $busca = '';
+} 
+if(isset($_GET['page']) && !empty($_GET['page'])){
+$page = $_GET['page'];
+}else{
+$page = 1;
 }
-// $totalprodutos = coutPage($pdo);
-// $totalPage = $totalproduto / 10 ;
-//  //:TODO
-$produtos = mostrar($pdo,$busca);
+
+$lim = $page * 10;
+$offset = $lim - 10;
+$totalProd = countPage($pdo);
+$totalPage = $totalProd / 10; 
+$produtos = mostrar($pdo,$busca,$lim,$offset);
 // echo memory_get_usage();
 
 ?>
@@ -51,11 +54,23 @@ $produtos = mostrar($pdo,$busca);
     <input type="submit" value="Pesquisar">
 </form>
 <h2> Produtos</h2>
+<span>Foram encontrados <?php echo $totalProd; ?> produtos cadastrados</span><br>
+<span>Você está na pagina <?php echo $page; ?> de <?php echo $totalPage; ?></span><br><br>
 <?php
   foreach($produtos as $produto){
     ?><img src="<?php echo $produto['foto']; ?>" width="200" height="200"><br><br> 
 <?php
-    echo $produto['titulo']. "<br>" ."R$ ".$produto['preco']."0" . "<br><br>";
+    echo $produto['titulo']. "<br>" ."R$ ".$produto['preco']."0" . "";
+  }
+?>
+
+<p> Paginação </p>
+<br>
+<?php
+  for($i = 1; $i < $totalPage+1;$i++){
+    ?>
+   <a href="<?php echo'?page='.$i ?>"><?php echo $i ?></a>
+    <?php
   }
 ?>
 </body>

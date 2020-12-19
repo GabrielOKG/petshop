@@ -4,13 +4,16 @@ if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já 
 } 
 require '../../models/produto.php';
 use Model\Produto;
-  function mostrar($pdo,$busca){
-    $lim = 1;
-    $offset = 0;
+  function mostrar($pdo,$busca,$lim,$offset){
     $produto = new Produto($pdo);
     if(empty($busca)){
-     return $produto->getAll(3,0);
+     return $produto->getAll($lim,$offset);
     }else{
-      return $produto->busca($busca,3,0);
+      return $produto->busca($busca,$lim,$offset);
     }
+  }
+
+    function countPage($pdo){
+      $produto = new Produto($pdo);
+       return $produto->count();
  }
