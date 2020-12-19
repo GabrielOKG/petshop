@@ -33,7 +33,7 @@ $enderecos = mostrarTodos($pdo);
     <?php }else{ 
         foreach($enderecos as $dado){
         echo $dado . "<br>";
-    } ?>  <?php } ?>
+    } ?><a href="atualiza.php">Atualizar Endereco</a><?php } ?>
 <script>
 </script>
 </body>

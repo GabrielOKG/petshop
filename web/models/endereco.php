@@ -1,14 +1,14 @@
 <?php
 namespace Model;
 
-  class Endereco{
+class Endereco{
     private $pdo;
      
     function __construct($pdo){
         $this->pdo = $pdo;
     }
-
-    function getAll($id_cliente){
+//busca o endereço do cliete e passa para um array
+function getAll($id_cliente){
       $sql = "SELECT rua,numero,bairro,complemento,cep,cidade,estado FROM endereco WHERE id_cliente=:id_cliente";
       $stmt = $this->pdo->prepare($sql);
       $stmt->BindValue(':id_cliente',$id_cliente);
@@ -27,7 +27,8 @@ namespace Model;
         'estado' => $dado['estado']);
       return $arr;
     } 
-    function novo($id_cliente,$rua,$numero,$bairro,$complemento,$cep,$cidade,$estado){ 
+//cadastra um endereço
+  function novo($id_cliente,$rua,$numero,$bairro,$complemento,$cep,$cidade,$estado){ 
     try{        
         $sql = "INSERT INTO endereco(id_cliente,rua,numero,bairro,complemento,cep,cidade,estado)VALUES(:id_cliente,:rua,:numero,:bairro,:complemento,:cep,:cidade,:estado)";
         $stmt = $this->pdo->prepare($sql);
@@ -45,12 +46,23 @@ namespace Model;
       print $e->getMessage();
     }
   }
-    function trocarPrincipal(){
-      //:TODO
-    }
-    function deletar(){
-      //:Todo
+  function atualiza($id_cliente,$rua,$numero,$bairro,$complemento,$cep,$cidade,$estado){ 
+    try{        
+        $sql = "UPDATE endereco SET rua=:rua,numero=:numero,bairro=:bairro,complemento=:complemento,cep=:cep,cidade=:cidade,estado=:estado WHERE id_cliente=:id_cliente";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->BindValue(':id_cliente',$id_cliente);
+        $stmt->BindValue(':rua',$rua);
+        $stmt->BindValue(':numero',$numero);
+        $stmt->BindValue(':bairro',$bairro);
+        $stmt->BindValue(':complemento',$complemento);
+        $stmt->BindValue(':cep',$cep);
+        $stmt->BindValue(':cidade',$cidade);
+        $stmt->BindValue(':estado',$estado);
+        $stmt->execute();
+        return true;
+    }catch(PDOException $e){
+      print $e->getMessage();
     }
   }
-
+  }
 ?>
