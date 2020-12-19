@@ -8,9 +8,9 @@
 <body>
     <form action='cadastrar.php' method="GET">
     <input type="text" name="titulo" placeholder="titulo">
-    <input type="textarea" name="descricao" placeholder="descricao">
+    <input type="text" name="descricao" placeholder="descricao">
     <br>
-    <textarea  name="detalhes" placeholder="detalhes">
+    <input type="text"  name="detalhes" placeholder="detalhes">
     <br>
     <input type="text" name="preco" step="0.1" placeholder="preco">
     <input type="text" name="foto" placeholder="foto">
