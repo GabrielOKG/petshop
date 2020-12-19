@@ -47,6 +47,14 @@ class Go{
           break;
         }
     }
+    public static function ProdutoController($param){
+      switch($param){
+        case "produto/exibir": 
+          return '../../controller/produto/exibir.php';
+        break;
+        
+      }
+  }
     public static function home($p){
        if($p == 'd')
          return 'location: ../../view/home/';

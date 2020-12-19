@@ -4,6 +4,11 @@
   } 
 require '../../../rotas.php'; 
 use Rota\Go;
+include_once '../../../DB/database.ini.php';
+include Go::ProdutoController('produto/exibir');
+$produtos = mostrar($pdo);
+// echo memory_get_usage();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -33,5 +38,13 @@ use Rota\Go;
     <input type="search" name="busca" placeholder="O que você está procurando?">
     <input type="submit" value="Pesquisar">
 </form>
+<h2> Ptodutos</h2>
+<?php
+  foreach($produtos as $produto){
+    ?><img src="<?php echo $produto['foto']; ?>" width="200" height="200"><br><br> 
+<?php
+    echo $produto['titulo']. "<br>" ."R$ ".$produto['preco']."0" . "<br><br>";
+  }
+?>
 </body>
 </html>
