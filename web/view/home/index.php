@@ -6,7 +6,19 @@ require '../../../rotas.php';
 use Rota\Go;
 include_once '../../../DB/database.ini.php';
 include Go::ProdutoController('produto/exibir');
-$produtos = mostrar($pdo);
+if(isset($_GET['busca']) && !empty($_GET['busca'])){
+$busca = $_GET['busca'];
+// $page = $_GET['page'];
+}else{
+$busca = '';
+// $page = 1;
+// $lim = $page * 10;
+// $offset = 0;
+}
+// $totalprodutos = coutPage($pdo);
+// $totalPage = $totalproduto / 10 ;
+//  //:TODO
+$produtos = mostrar($pdo,$busca);
 // echo memory_get_usage();
 
 ?>
@@ -34,11 +46,11 @@ $produtos = mostrar($pdo);
 <a href="<?php echo Go::UserController('cadastro/l'); ?>">cadastro</a>
  <?php } ?>
     <br>
-<form action="#" method="GET">
+<form action="" method="GET">
     <input type="search" name="busca" placeholder="O que você está procurando?">
     <input type="submit" value="Pesquisar">
 </form>
-<h2> Ptodutos</h2>
+<h2> Produtos</h2>
 <?php
   foreach($produtos as $produto){
     ?><img src="<?php echo $produto['foto']; ?>" width="200" height="200"><br><br> 
