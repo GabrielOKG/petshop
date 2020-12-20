@@ -11,19 +11,11 @@ $busca = $_GET['busca'];
 }else{
   $busca = '';
 } 
-if(isset($_GET['page']) && !empty($_GET['page'])){
-$page = $_GET['page'];
-}else{
-$page = 1;
-}
 
-$lim = $page * 10;
-$offset = $lim - 10;
-$totalProd = countPage($pdo);
-$totalPage = $totalProd / 10; 
-$produtos = mostrar($pdo,$busca,$lim,$offset);
+$produtos = mostrar($pdo,$busca);
 // echo memory_get_usage();
-
+$totalProd = $produtos['count'];
+unset($produtos['count']);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -41,7 +33,7 @@ $produtos = mostrar($pdo,$busca,$lim,$offset);
     <a href="<?php echo Go::UserController('logout'); ?>">Logout</a><br>
     <a href="<?php echo Go::conta('l'); ?>">Minha conta</a><br>
     <a href="<?php echo Go::carrinho('l'); ?>">Meu Carrinho</a><br>
-  <?php }else{ ?>
+<?php }else{ ?>
 <!-- Se não isso -->
 <h1> Não Logado </h1>
 <a href="<?php echo Go::UserController('login/l'); ?>">Login</a>
@@ -55,23 +47,20 @@ $produtos = mostrar($pdo,$busca,$lim,$offset);
 </form>
 <h2> Produtos</h2>
 <span>Foram encontrados <?php echo $totalProd; ?> produtos cadastrados</span><br>
-<span>Você está na pagina <?php echo $page; ?> de <?php echo $totalPage; ?></span><br><br>
 <?php
   foreach($produtos as $produto){
     ?><img src="<?php echo $produto['foto']; ?>" width="200" height="200"><br><br> 
 <?php
-    echo $produto['titulo']. "<br>" ."R$ ".$produto['preco']."0" . "";
+    echo $produto['titulo']. "<br>" ."R$ ".$produto['preco']."0 <br>";
+?>
+    <form action="<?php echo Go::carrinho("controller/add"); ?>" method="POST">
+      <input type="number" name="qtd" placeholder="qtd">
+      <input name="id_produto" value="<?php echo $produto['id']; ?>" type = "hidden">
+      <input type="submit" value="adicionar ao carrinho">
+    </form>
+<?php
   }
 ?>
 
-<p> Paginação </p>
-<br>
-<?php
-  for($i = 1; $i < $totalPage+1;$i++){
-    ?>
-   <a href="<?php echo'?page='.$i ?>"><?php echo $i ?></a>
-    <?php
-  }
-?>
 </body>
 </html>

@@ -31,10 +31,10 @@ $arr = User::formatar();
     <br>
     <br>
     <p><?php foreach($arr as $dado){
-      echo $dado . " <br>";  
+      echo $dado . " <br>";  //:TODO
     }
     ?></p>
-   
+    <a href="atualizarCadastro.php">Atualizar Cadastro</a>
     
 <script>
 </script>

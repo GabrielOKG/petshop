@@ -4,16 +4,8 @@ if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já 
 } 
 require '../../models/produto.php';
 use Model\Produto;
-  function mostrar($pdo,$busca,$lim,$offset){
+  function mostrar($pdo,$busca){
     $produto = new Produto($pdo);
-    if(empty($busca)){
-     return $produto->getAll($lim,$offset);
-    }else{
-      return $produto->busca($busca,$lim,$offset);
+      return $produto->busca($busca);
     }
-  }
-
-    function countPage($pdo){
-      $produto = new Produto($pdo);
-       return $produto->count();
- }
+  

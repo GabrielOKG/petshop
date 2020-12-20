@@ -68,10 +68,23 @@ class Go{
           return '../../view/conta/';
       }
       public static function carrinho($p){
-        if($p == 'd')
-          return 'location: ../../view/carrinho/';
-        if($p == 'l')
-          return '../../view/carrinho/';
+        switch($p){
+          case "d":
+            return 'location: ../../view/carrinho/';
+          break;
+          case "l": 
+            return '../../view/carrinho/';
+          break;
+          case "controller/add": 
+            return '../../controller/carrinho/add.php';
+          break;
+          case "controller/exibir": 
+            return '../../controller/carrinho/exibir.php';
+          break;
+          case "controller/editar": 
+            return '../../controller/carrinho/editar.php';
+          break;
+        }
       }
       public static function endereco($p){
         if($p == 'd')
