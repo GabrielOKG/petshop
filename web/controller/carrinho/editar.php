@@ -13,7 +13,7 @@ use Model\Carrinho;
 
 if(isset($_POST['id_item']) && !empty($_POST['id_item'])){
     $item = new Carrinho($pdo);
-    if(isset($_POST['editar']) && isset($_POST['qtd']) && !empty($_POST['qtd'])){
+    if(isset($_POST['editar']) && isset($_POST['qtd']) && isset($_POST['qtd']) && !empty($_POST['qtd'])){
         if($item->mudarQtd($_POST['id_item'],$_POST['qtd'])){
             echo "<script language='javascript' type='text/javascript'>
             alert('Quantidade atualizada');window.location.href='". Go::carrinho('l') ."';</script>";
