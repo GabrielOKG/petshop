@@ -21,21 +21,30 @@ $enderecos = mostrarTodos($pdo);
     <title>Petshop - Pagina Inicial</title>
 </head>
 <body>
-    <h1>Endereço</h1>
-    <a href="<?php echo Go::UserController('logout'); ?>">Logout</a>
-    <br>
-    <a href="<?php echo Go::home('l'); ?>">Home</a>
-    <br>
-    <a href="<?php echo Go::conta('l'); ?>">Conta</a>
-    <h3>endereços Cadastrados</h3>
-    <?php if($enderecos == false) { ?><p>Voce não possui nenhum endereco cadastrado</p><br>
+<div class ="justify-content-center align-itens-center row">
+            <div class = "col-6" >
+                <br><br><br><br><br><br><br>
+<ul class="list-group" style="border: 1px solid black;">
+<div class= "text-center mb-2">
+  <li class="list-group-item active" aria-current="true" style="background-color: silver; border:none">INFORMAÇÕES</li>
+</div>
+  <?php if($enderecos == false) { ?><p>Voce não possui nenhum endereco cadastrado</p><br>
     <a href="novo.php">Novo endereco</a>
     <?php }else{ 
         foreach($enderecos as $dado){
-        echo $dado . "<br>";
-    } ?><a href="atualiza.php">Atualizar Endereco</a><?php } ?>
-<script>
-</script>
+        ?><li class="list-group-item"><?php echo $dado;?></li><?php
+    } ?>
+    <li class="list-group-item active "  aria-current="true" style="background-color: black; border:none">
+    <div class= "text-center mb-2">
+    <a href="atualiza.php" style="color: #fff; text-decoration:none;  "><b> Atualizar Endereço</b></a>
+    </div>
+    </li>
+    <?php } ?>
+
+
+</ul>
+</div>
+</div>
 </body>
 </html>
 
