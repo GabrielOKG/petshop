@@ -19,6 +19,32 @@ if(isset($_SESSION['id'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    <script> 
+        function mascara_cpf(){
+                var cpf = document.getElementById('cpf')
+                if(cpf.value.length == 3 | cpf.value.length == 7 ){
+                    cpf.value += "."
+                }
+                if(cpf.value.length == 11 ){
+                    cpf.value +="-"
+                }
+
+
+        }
+
+        function mascara_telefone(){
+                var tel = document.getElementById('tel')
+                if(tel.value.length == 1 ){
+                    tel.value += "("
+                }
+
+                if(tel.value.length == 9 ){
+                    tel.value +="-"
+                }
+
+                
+        }
+    </script>
     <style>
         html, body{
             height: 100%;
@@ -73,10 +99,10 @@ if(isset($_SESSION['id'])){
                             <input type="text" placeholder="Sobrenome" name="sobrenome" class="form-control"><br>
                         </div>
                         <div class="form-group">    
-                            <input type="text" placeholder="CPF" name="cpf" class="form-control" maxlength="11"><br>
+                            <input type="text" placeholder="CPF" name="cpf" id="cpf" class="form-control"  onkeyup="mascara_cpf()" maxlength="14"><br>
                         </div>
                         <div class="form-group">    
-                            <input type="text" placeholder="Telefone" name="telefone" class="form-control" maxlength="11"><br>
+                            <input type="text" placeholder="Telefone"  id="tel" name="telefone" class="form-control" onkeyup="mascara_telefone()" maxlength="14"><br>
                         </div>
                         <div class="form-group">
                             <input type="password" placeholder="Senha" name="senha"class="form-control"><br>
