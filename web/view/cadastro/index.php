@@ -23,27 +23,37 @@ if(isset($_SESSION['id'])){
         function mascara_cpf(){
                 var cpf = document.getElementById('cpf')
                 if(cpf.value.length == 3 | cpf.value.length == 7 ){
-                    cpf.value += "."
+                    cpf.value += ".";
                 }
                 if(cpf.value.length == 11 ){
-                    cpf.value +="-"
+                    cpf.value +="-";
                 }
 
 
         }
-
-        function mascara_telefone(){
-                var tel = document.getElementById('tel')
-                if(tel.value.length == 1 ){
-                    tel.value += "("
-                }
-
-                if(tel.value.length == 9 ){
-                    tel.value +="-"
-                }
-
-                
+        function mask(o, f) {
+            setTimeout(function() {
+                var v = mphone(o.value);
+                    if (v != o.value) {
+                o.value = v;
+            }
+            }, 1);
         }
+
+        function mphone(v) {
+            var r = v.replace(/\D/g, "");
+            r = r.replace(/^0/, "");
+            if (r.length > 10) {
+            r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+            } else if (r.length > 5) {
+            r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+            } else if (r.length > 2) {
+            r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+            } else {
+            r = r.replace(/^(\d*)/, "($1");
+            }
+        return r;
+    }
     </script>
     <style>
         html, body{
@@ -102,7 +112,7 @@ if(isset($_SESSION['id'])){
                             <input type="text" placeholder="CPF" name="cpf" id="cpf" class="form-control"  onkeyup="mascara_cpf()" maxlength="14"><br>
                         </div>
                         <div class="form-group">    
-                            <input type="text" placeholder="Telefone"  id="tel" name="telefone" class="form-control" onkeyup="mascara_telefone()" maxlength="14"><br>
+                            <input type="text" placeholder="Telefone"  id="phone" name="telefone" class="form-control" onkeypress="mask(this, mphone);" onblur="mask(this, mphone);" ><br>
                         </div>
                         <div class="form-group">
                             <input type="password" placeholder="Senha" name="senha"class="form-control"><br>
