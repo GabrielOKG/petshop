@@ -61,7 +61,7 @@ namespace Model;
     static function formatar(){
       //formatando data de nascimento
       $data = date('d/m/Y', strtotime($_SESSION['nascimento']));
-      if($_SESSION['sexo'] === 'M'){
+      if($_SESSION['sexo'] === 'm' || $_SESSION['sexo'] === 'M'){
         $sexo = 'Masculino';
       }else{
         $sexo = 'Feminino';
