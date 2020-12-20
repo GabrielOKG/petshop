@@ -6,9 +6,6 @@ namespace Model;
         $this->pdo = $pdo;
 }
     function cadastrarUser($nome,$sobrenome,$nascimento,$sexo,$cpf,$telefone,$email,$senha){
-     if(strlen($cpf) != 11){
-        return false;
-      }
       // Verifica se o email já foi cadastrado
       $sql = "SELECT email,senha,cpf FROM cliente WHERE email=:email AND senha=:senha OR cpf=:cpf";
       $stmt = $this->pdo->prepare($sql);
