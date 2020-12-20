@@ -58,11 +58,10 @@ if(isset($_SESSION['id'])){
                         </div>
 
                         <div class="form-group" >    
-                            <select name="select" class="form-control">
-                            <option  selected disabled>Sexo</option>
-                            <option value="m">Masculino</option>
-                            <option value="f" >Feminino</option>
-                            
+                            <select name="sexo" class="form-control">
+                                <option  selected disabled>Sexo</option>
+                                <option value="m">Masculino</option>
+                                <option value="f" >Feminino</option>
                             </select><br>
                         </div>
                         <div class="form-group">    
@@ -77,7 +76,7 @@ if(isset($_SESSION['id'])){
                             <input type="text" placeholder="CPF" name="cpf" class="form-control" maxlength="11"><br>
                         </div>
                         <div class="form-group">    
-                            <input type="phone" placeholder="Telefone" name="telefone" class="form-control" maxlength="11"><br>
+                            <input type="text" placeholder="Telefone" name="telefone" class="form-control" maxlength="11"><br>
                         </div>
                         <div class="form-group">
                             <input type="password" placeholder="Senha" name="senha"class="form-control"><br>

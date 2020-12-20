@@ -5,9 +5,12 @@ namespace Model;
     function __construct($pdo){
         $this->pdo = $pdo;
 }
-    function cadastrarUser($nome,$sobrenome,$nascimento,$sexo,$cpf,$email,$senha){
+    function cadastrarUser($nome,$sobrenome,$nascimento,$sexo,$cpf,$telefone,$email,$senha){
+     if(strlen($cpf) != 11){
+        return false;
+      }
       // Verifica se o email já foi cadastrado
-      $sql = "SELECT email,senha,cpf FROM cliente WHERE   email=:email AND senha=:senha OR cpf=:cpf";
+      $sql = "SELECT email,senha,cpf FROM cliente WHERE email=:email AND senha=:senha OR cpf=:cpf";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':email', $email);
       $stmt->bindValue(':senha', sha1($senha));
@@ -17,7 +20,7 @@ namespace Model;
         return false;
       }else{
         //prepara para inserir os valores
-        $sql = "INSERT INTO cliente(nome, sobrenome, cpf, sexo , nascimento, email, senha) VALUES(:nome,:sobrenome,:cpf,:sexo,:nascimento,:email,:senha)";
+        $sql = "INSERT INTO cliente(nome, sobrenome, cpf, sexo , nascimento, email, senha,telefone) VALUES(:nome,:sobrenome,:cpf,:sexo,:nascimento,:email,:senha,:telefone)";
         $stmt = $this->pdo->prepare($sql);
         //passando os valores
         $stmt->bindValue(':nome', $nome);
@@ -27,6 +30,7 @@ namespace Model;
         $stmt->bindValue(':nascimento', $nascimento);
         $stmt->bindValue(':email', $email);
         $stmt->bindValue(':senha', sha1($senha));
+        $stmt->bindValue(':telefone', $telefone);
         $stmt->execute();
         return true;
       }
@@ -39,7 +43,7 @@ namespace Model;
       $stmt->bindValue(':email', $email);
       $stmt->bindValue(':senha', sha1($senha));
       $stmt->execute();
-      //Armazenando os dados em Sessions user
+      //Armazenando os dados em Session
       if($stmt->rowCount() != 0){
         $dado = $stmt->fetch();
         $_SESSION['id'] = $dado['id'];
