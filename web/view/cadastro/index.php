@@ -10,25 +10,88 @@ if(isset($_SESSION['id'])){
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    <style>
+        html, body{
+            height: 100%;
+        }
+        body{
+            display: flex;
+            align-items: center;
+        }
+        .formLogin{
+            background-color: silver;
+            color: #fff;
+            padding: 50px;
+            border: 1px solid #000;
+            box-shadow: 3px 3px #000;
+            border-radius: 20px;
+        }
+    </style>
+    
 </head>
 <body>
-    <form action="<?php echo Go::UserController('cadastroController');?>" method="POST">
-    <input type="text" name="nome" placeholder="Nome">
-    <input type="text" name="sobrenome" placeholder="Sobrenome">
-    <br>
-    <input type="date" name="nascimento" placeholder="Nascimento">
-    <input type="text" name="sexo" placeholder="Sexo">
-    <br>
-    <input type="number" name="cpf" placeholder="Cpf">
-    <input type="email" name="email" placeholder="Email">
-    <br>
-    <input type="password" name="senha" placeholder="Senha">
-    <input type="submit" value="Cadastrar">
-    </form>
+    <div class ="container">
+        <div class ="justify-content-center align-itens-center row">
+            <div class = "col-4" >
+                    
+                <form class="formLogin" action='<?php echo Go::UserController('loginController'); ?>' method="POST">
+                    <div class="text-center mb-2">
+                        <h2>Petshop</h2>
+                    </div>
+                        <div class="col-6"></div>
+                         <div class="form-group">    
+                            <input type="text" placeholder="Nome" name="nome" class="form-control"><br>
+                        </div>
+
+                        <div class="form-group">    
+                            <input type="text" placeholder="Sobrenome" name="sobrenome" class="form-control"><br>
+                        </div>
+
+                        <div class="form-group">    
+                            <input type="date" placeholder="Nascimento" name="nascimento" class="form-control"><br>
+                        </div>
+
+                        <div class="form-group" >    
+                            <select name="select" class="form-control">
+                            <option  selected disabled>Sexo</option>
+                            <option value="m">Masculino</option>
+                            <option value="f" >Feminino</option>
+                            
+                            </select><br>
+                        </div>
+
+                        <div class="form-group">    
+                            <input type="number" placeholder="CPF" name="cpf" class="form-control"><br>
+                        </div>
+
+                        <div class="form-group">    
+                            <input type="email" placeholder="E-mail" name="email" class="form-control"><br>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="password" placeholder="Senha" name="senha"class="form-control"><br>
+                        </div>    
+                        
+                        <div class="form-group">
+                            <input type="submit" value="Logar" class="form-control" style="background-color: rgb(22, 16, 16); color:snow;"><br>
+                        </div>   
+                        
+                        <div class= "text-center mb-2">
+                        <a href="<?php echo Go::UserController('cadastro/l'); ?>" style="text-decoration:none;" >Casdastro</a>
+                        </div>                        
+                </form>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
