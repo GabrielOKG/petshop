@@ -74,10 +74,10 @@ if(isset($_SESSION['id'])){
                             <input type="text" placeholder="Sobrenome" name="sobrenome" class="form-control"><br>
                         </div>
                         <div class="form-group">    
-                            <input type="number" placeholder="CPF" name="cpf" class="form-control"><br>
+                            <input type="text" placeholder="CPF" name="cpf" class="form-control" maxlength="11"><br>
                         </div>
                         <div class="form-group">    
-                            <input type="text" placeholder="Sobrenome" name="sobrenome" class="form-control"><br>
+                            <input type="phone" placeholder="Telefone" name="telefone" class="form-control" maxlength="11"><br>
                         </div>
                         <div class="form-group">
                             <input type="password" placeholder="Senha" name="senha"class="form-control"><br>
