@@ -41,19 +41,16 @@ if(isset($_SESSION['id'])){
 <body>
     <div class ="container">
         <div class ="justify-content-center align-itens-center row">
-            <div class = "col-4" >
+            <div class = "col-6" >
                     
-                <form class="formLogin" action='<?php echo Go::UserController('loginController'); ?>' method="POST">
+                <form class="formLogin" action='<?php echo Go::UserController('cadastroController'); ?>' method="POST">
                     <div class="text-center mb-2">
                         <h2>Petshop</h2>
                     </div>
-                        <div class="col-6"></div>
+                    <div class="justify-content-center align-itens-center row">
+                    <div class="col-6">
                          <div class="form-group">    
                             <input type="text" placeholder="Nome" name="nome" class="form-control"><br>
-                        </div>
-
-                        <div class="form-group">    
-                            <input type="text" placeholder="Sobrenome" name="sobrenome" class="form-control"><br>
                         </div>
 
                         <div class="form-group">    
@@ -68,26 +65,32 @@ if(isset($_SESSION['id'])){
                             
                             </select><br>
                         </div>
-
-                        <div class="form-group">    
-                            <input type="number" placeholder="CPF" name="cpf" class="form-control"><br>
-                        </div>
-
                         <div class="form-group">    
                             <input type="email" placeholder="E-mail" name="email" class="form-control"><br>
                         </div>
-                        
+                        </div>
+                        <div class="col-6">
+                        <div class="form-group">    
+                            <input type="text" placeholder="Sobrenome" name="sobrenome" class="form-control"><br>
+                        </div>
+                        <div class="form-group">    
+                            <input type="number" placeholder="CPF" name="cpf" class="form-control"><br>
+                        </div>
+                        <div class="form-group">    
+                            <input type="text" placeholder="Sobrenome" name="sobrenome" class="form-control"><br>
+                        </div>
                         <div class="form-group">
                             <input type="password" placeholder="Senha" name="senha"class="form-control"><br>
                         </div>    
-                        
+                        </div>
                         <div class="form-group">
                             <input type="submit" value="Logar" class="form-control" style="background-color: rgb(22, 16, 16); color:snow;"><br>
                         </div>   
                         
                         <div class= "text-center mb-2">
                         <a href="<?php echo Go::UserController('cadastro/l'); ?>" style="text-decoration:none;" >Casdastro</a>
-                        </div>                        
+                        </div>  
+                    </div>                      
                 </form>
             </div>
         </div>
