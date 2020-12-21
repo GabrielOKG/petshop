@@ -7,7 +7,7 @@ namespace Model;
 }
     function cadastrarUser($nome,$sobrenome,$nascimento,$sexo,$cpf,$telefone,$email,$senha){
       // Verifica se o email já foi cadastrado
-      $sql = "SELECT email,senha,cpf FROM cliente WHERE email=:email AND senha=:senha OR cpf=:cpf";
+      $sql = "SELECT id FROM cliente WHERE email=:email AND senha=:senha OR cpf=:cpf";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':email', $email);
       $stmt->bindValue(':senha', sha1($senha));
