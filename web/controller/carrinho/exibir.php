@@ -16,3 +16,4 @@ use Model\Carrinho;
     $pedido = new Carrinho($pdo);
     return $pedido->getPedidos($_SESSION['id']);
 }
+

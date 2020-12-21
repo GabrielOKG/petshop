@@ -11,17 +11,17 @@ require '../../models/carrinho.php';
 include_once '../../../DB/database.ini.php';
 
 use Model\Carrinho;
-if(isset($_POST['id_carrinho']) && !empty($_POST['id_carrinho'])){
+if(isset($_POST['id_carrinho']) && !empty($_POST['id_carrinho']) && isset($_POST['total']) && !empty($_POST['total']) && $_POST['total'] > 0){
     $item = new Carrinho($pdo);
     $id_carrinho = $_POST['id_carrinho'];
-    if($item->fecharPedito($id_carrinho,$total) == true){
+    if($item->fecharPedido($id_carrinho,$_POST['total']) == true){
         echo "<script language='javascript' type='text/javascript'>
-        window.location.href='". Go::carrinho('l') ."';</script>";
+        window.location.href='". Go::carrinho('pedido') ."';</script>";
     }else{
         echo "<script language='javascript' type='text/javascript'>
         alert('Ocorreu um erro , tente mais tarde');window.location.href='". Go::carrinho('l') ."';</script>";
     }
 }else{
     echo "<script language='javascript' type='text/javascript'>
-        alert('Ocorreu um erro , tente mais tarde');window.location.href='". Go::carrinho('l') ."';</script>"; 
+        window.location.href='". Go::carrinho('l') ."';</script>"; 
 }

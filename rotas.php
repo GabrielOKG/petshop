@@ -74,8 +74,13 @@ class Go{
           case "l": 
             return '../../view/carrinho/';
           break;
+          case "pedido": 
+            return '../../view/pedidos';
+          break;
+          case "controller/fechar": 
+            return '../../controller/carrinho/pedido.php';
           case "controller/add": 
-            return '../../controller/carrinho/add.php';
+              return '../../controller/carrinho/add.php';
           break;
           case "controller/exibir": 
             return '../../controller/carrinho/exibir.php';

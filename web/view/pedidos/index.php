@@ -24,19 +24,7 @@ $pedidos = mostrarPedidos($pdo);
     include '../global_header.php';
  ?>
   
-    <?php if($enderecos == false) { ?>
-        <table class="table table-striped table-sm">
-        <tbody>
-            <tr>
-              <td><p>Você não possui endereço cadastrado</td>
-            </tr> 
-          </tbody>
-        </table>
     <br>
-    <a href="novo.php" style="text-decoration:none;">Novo endereco</a>
-    <?php }else{ 
-        
-    ?>  <br>
     <br><br>
     <br>
    
@@ -48,34 +36,42 @@ $pedidos = mostrarPedidos($pdo);
         <a disable style="text-decoration:none;color:silver;">Meus pedidos</a>
       </div>
       <div class="col-3">
-
-      <table class="table table-striped table-sm">
-        <tbody>
+      <table class="table">
+      <tbody>
+      <?php if($pedidos == false) { ?>
+        
+        
             <tr>
-              <td><?php echo "Logradouro: ".$enderecos['rua'].", ".$enderecos['numero'] ?></td>
+              <td><p>Você não possui endereço cadastrado</td>
             </tr> 
+    <?php }else{ 
+        foreach($pedidos as $pedido){
+    ?> 
             <tr>
-              <td><?php echo "Bairro: ".$enderecos['bairro']; ?></td>
-            </tr>
-            <tr>
-              <td><?php echo "CEP: ".$enderecos['cep']; ?></td>
+              <td>Codigo do pedido: <?php echo $pedido['id'];?><br>
+              Feito em: <?php echo $pedido['quando']; ?><br>
+              Valor: R$<?php echo $pedido['total']; ?>0<br>
+              Status: <?php if($pedido['status'] == 0){
+                echo "<span style='color:red;'>Pedido cancelado</span>";
+             }else{
+                echo "<span style='color:blue;'>Pedido sendo separado</span>";
+                ?>
+                <form action="<?php echo Go::carrinho("controller/cancelarPedido");?>" method="POST">
+                    <input name="id_carrinho" value="<?php echo $pedido['id']; ?>" type = "hidden">
+                    <input type="submit" class="form-control" style="background-color:#c00;color:white;font-size:16px;" name="remover" value="Cancelar Pedido"> 
+                </form>
+                <?php
+                
+             } ?>
+              </td>
             </tr> 
-            <tr>
-              <td><?php echo "Cidade: ".$enderecos['cidade']; ?></td>
-            </tr>
-            <tr>
-              <td><?php echo "Estado: ".$enderecos['estado']; ?></td>
-            </tr>
-          </tbody>
+           
+         <?php } }?>
+        </tbody>
         </table>
-
-        <a href="atualiza.php" style=text-decoration:none;>Atualizar Endereço</a>
       </div>
-    </div><?php } ?>
-
-
-<script>
-</script>
+     
+    </div> 
 </body>
 </html>
 

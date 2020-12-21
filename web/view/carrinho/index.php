@@ -14,6 +14,7 @@ $pedidos = mostrarPedidos($pdo);
 $totalItens = $itens['count'];
 unset($itens['count']);
 $preco = 0;
+$id_carrinho;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -42,6 +43,7 @@ include '../global_header.php';
     <?php
     foreach($itens as $item){
         $preco += $item['qtd'] * $item['preco'];
+        $id_carrinho = $item['id_carrinho'];
        ?>
             <tr>
               <td>
@@ -110,16 +112,11 @@ include '../global_header.php';
           </li>
         </ul>
 
-        <!-- <form class="card p-2">
+        <form class="card p-2" action="<?php echo Go::carrinho("controller/fechar"); ?>" method="POST"">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Cupom de desconto">
-            <button type="submit" class="btn btn-secondary">Validar</button>
-          </div>
-        </form> -->
-
-        <form class="card p-2">
-          <div class="input-group">
-            <button type="submit" class="form-control">Fechar Pedido</button>
+          <input name="id_carrinho" value="<?php echo $id_carrinho;?>" type = "hidden">
+          <input name="total" value="<?php echo $preco; ?>" type = "hidden">
+            <input type="submit" class="form-control" value="Fechar Pedido">
           </div>
         </form>
       </div>

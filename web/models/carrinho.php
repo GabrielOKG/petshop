@@ -69,9 +69,9 @@ namespace Model;
       return true;
     }
     function getAll($id_cliente){
-    try{$sql = "SELECT I.id,I.qtd,P.titulo,P.preco,P.foto FROM (
+    try{$sql = "SELECT I.id,I.qtd,I.id_carrinho,P.titulo,P.preco,P.foto FROM (
         (produto as P JOIN item as I ON I.id_produto = P.id) 
-        JOIN carrinho as C ON I.id_carrinho = C.id ) WHERE C.id_cliente = :id_cliente";
+        JOIN carrinho as C ON I.id_carrinho = C.id ) WHERE C.id_cliente = :id_cliente AND C.status = 1";
       $stmt = $this->pdo->prepare($sql);
       $stmt->BindValue(':id_cliente',$id_cliente);
       $stmt->execute(); 
@@ -80,6 +80,7 @@ namespace Model;
       while($dado = $stmt->fetch(\PDO::FETCH_ASSOC)){
           $a = array(
             'id' => $dado['id'],
+            'id_carrinho' => $dado['id_carrinho'],
             'titulo' => $dado['titulo'],
             'preco' => $dado['preco'],
             'qtd' => $dado['qtd'],
@@ -95,7 +96,7 @@ namespace Model;
     }
 
     function fecharPedido($id_carrinho,$total){
-      $sql = "UPDATE carrinho SET status=2,total=:total,quando= current_timestamp WHERE id=:id_carrinho";
+      $sql ="UPDATE carrinho SET status=2,total=:total,quando= current_timestamp WHERE id=:id_carrinho";
       $stmt = $this->pdo->prepare($sql);
       $stmt->BindValue(':id_carrinho',$id_carrinho);
       $stmt->BindValue(':total',$total);
@@ -116,7 +117,7 @@ namespace Model;
     }
 
     function getPedidos($id_cliente){
-        $sql = "SELECT * FROM carrinho WHERE id_cliente=:id_cliente AND NOT status=1";
+        $sql = "SELECT * FROM carrinho WHERE id_cliente=:id_cliente AND NOT status=1 order by id desc";
         $stmt = $this->pdo->prepare($sql);
         $stmt->BindValue(':id_cliente',$id_cliente);
         if($stmt->execute()){

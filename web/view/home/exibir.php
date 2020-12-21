@@ -37,14 +37,11 @@ if(isset($_SESSION['id'])){
             <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="<?php echo $produto['foto']; ?>" >
                 <br>
-            <form>
+            <form action="<?php echo Go::carrinho("controller/add"); ?>" method="POST"> <br>
               <div class="row">
-                <div class="col-12">
-                <input type="submit" class="form-control text-center" style="background-color:blue;color:white;" value="ADICIONAR AO CARRINHO"><br>
-                </div>
-                
                 <div class='col-12'>
-                <input type="submit" class="form-control text-center" style="background-color:green;color:white;" value="COMPRAR">
+                <input name="id_produto" value="<?php echo $produto['id']; ?>" type = "hidden">
+                <input type="submit" class="form-control text-center" style="background-color:green;color:white;" value="ADICIONAR AO CARRINHO">
                 </div>
                 </div>
             </form>
@@ -54,11 +51,9 @@ if(isset($_SESSION['id'])){
                 <p style="font-size:24px;"><?php echo $produto['titulo']; ?></p>
                 <p style="font-size:18;"><?php echo $produto['descricao']; ?></p>
                 <br> <p style="font-size:18;"><?php echo $produto['detalhes']; ?></p>
-
             </div>
          </div>
          </div>
-         </div>
-        
+         </div>   
 </body>
 </html>

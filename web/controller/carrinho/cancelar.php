@@ -16,12 +16,12 @@ if(isset($_POST['id_carrinho']) && !empty($_POST['id_carrinho'])){
     $id_carrinho = $_POST['id_carrinho'];
     if($item->cancelarPedido($id_carrinho) == true){
         echo "<script language='javascript' type='text/javascript'>
-        window.location.href='". Go::carrinho('l') ."';</script>";
+        window.location.href='". Go::carrinho('pedido') ."';</script>";
     }else{
         echo "<script language='javascript' type='text/javascript'>
-        alert('Ocorreu um erro , tente mais tarde');window.location.href='". Go::carrinho('l') ."';</script>";
+        alert('Ocorreu um erro , tente mais tarde');window.location.href='". Go::carrinho('pedido') ."';</script>";
     }
 }else{
     echo "<script language='javascript' type='text/javascript'>
-        alert('Ocorreu um erro , tente mais tarde');window.location.href='". Go::carrinho('l') ."';</script>"; 
+        alert('Ocorreu um erro , tente mais tarde');window.location.href='". Go::carrinho('pedido') ."';</script>"; 
 }
