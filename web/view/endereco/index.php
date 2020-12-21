@@ -9,7 +9,6 @@ if(!isset($_SESSION['id'])){
 }
 include_once '../../../DB/database.ini.php';
 include Go::ContaController('endereco/mostrarTodos');
-
 $enderecos = mostrarTodos($pdo);
 ?>
 <!DOCTYPE html>
@@ -21,30 +20,61 @@ $enderecos = mostrarTodos($pdo);
     <title>Petshop - Pagina Inicial</title>
 </head>
 <body>
-<div class ="justify-content-center align-itens-center row">
-            <div class = "col-6" >
-                <br><br><br><br><br><br><br>
-<ul class="list-group" style="border: 1px solid black;">
-<div class= "text-center mb-2">
-  <li class="list-group-item active" aria-current="true" style="background-color: silver; border:none">INFORMAÇÕES</li>
-</div>
-  <?php if($enderecos == false) { ?><p>Voce não possui nenhum endereco cadastrado</p><br>
-    <a href="novo.php">Novo endereco</a>
+ <?php 
+    include '../global_header.php';
+ ?>
+  
+    <?php if($enderecos == false) { ?>
+        <table class="table table-striped table-sm">
+        <tbody>
+            <tr>
+              <td><p>Você não possui endereço cadastrado</td>
+            </tr> 
+          </tbody>
+        </table>
+    <br>
+    <a href="novo.php" style="text-decoration:none;">Novo endereco</a>
     <?php }else{ 
-        foreach($enderecos as $dado){
-        ?><li class="list-group-item"><?php echo $dado;?></li><?php
-    } ?>
-    <li class="list-group-item active "  aria-current="true" style="background-color: black; border:none">
-    <div class= "text-center mb-2">
-    <a href="atualiza.php" style="color: #fff; text-decoration:none;  "><b> Atualizar Endereço</b></a>
-    </div>
-    </li>
-    <?php } ?>
+        
+    ?>  <br>
+    <br><br>
+    <br>
+   
+    
+    <div class="row" style="margin:4px;">
+      <div class="col-3">
+      <a href="../conta" style="text-decoration:none;">Minha conta</a><br>
+          <a disable style="text-decoration:none;color:silver;">Endereço de entrega</a>
+      </div>
+      <div class="col-3">
+
+      <table class="table table-striped table-sm">
+        <tbody>
+            <tr>
+              <td><?php echo "Logradouro: ".$enderecos['rua'].", ".$enderecos['numero'] ?></td>
+            </tr> 
+            <tr>
+              <td><?php echo "Bairro: ".$enderecos['bairro']; ?></td>
+            </tr>
+            <tr>
+              <td><?php echo "CEP: ".$enderecos['cep']; ?></td>
+            </tr> 
+            <tr>
+              <td><?php echo "Cidade: ".$enderecos['cidade']; ?></td>
+            </tr>
+            <tr>
+              <td><?php echo "Estado: ".$enderecos['estado']; ?></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <a href="atualiza.php" style=text-decoration:none;>Atualizar Endereço</a>
+      </div>
+    </div><?php } ?>
 
 
-</ul>
-</div>
-</div>
+<script>
+</script>
 </body>
 </html>
 

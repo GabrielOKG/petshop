@@ -8,7 +8,7 @@ namespace Model;
         $this->pdo = $pdo;
     }
 
-    function adicionar($id_cliente,$id_produto,$qtd){
+    function adicionar($id_cliente,$id_produto){
     //verificando se o cliente possui um carrinho ativo
         $sql = "SELECT id FROM carrinho WHERE id_cliente=:id_cliente AND status=1";
         $stmt = $this->pdo->prepare($sql);
@@ -16,9 +16,10 @@ namespace Model;
         $stmt->execute(); 
         $dado = $stmt->fetch();
         $cr = $dado['id'];
+
         if($stmt->rowCount() == 0){
           $pdo->beginTransaction(); // inicia uma transação
-    //Criando um carrinho ativo para o cliente
+          //Criando um carrinho ativo para o cliente
           $sql = "INSERT INTO carrinho(id_cliente,status) VALUES(:id_cliente,1) RETURNING id ";
           $carrinho = $this->pdo->prepare($sql);
           $carrinho->BindValue(':id_cliente',$id_cliente);
@@ -26,11 +27,10 @@ namespace Model;
           $dado = $carrinho->fetch();
           $cr = $dado['id'];
           //adicionando item ao carrinho
-          $sql = "INSERT INTO item(id_carrinho,id_produto,qtd) VALUES(id_carrinho,:id_produto,:qtd)";
+          $sql = "INSERT INTO item(id_carrinho,id_produto,qtd) VALUES(id_carrinho,:id_produto,1)";
           $carrinho = $this->pdo->prepare($sql);
           $carrinho->BindValue(':id_carrinho',$cr);
           $carrinho->BindValue(':id_produto',$id_produto);
-          $carrinho->BindValue(':qtd',$qtd);
           if(!$carrinho->execute()){
             $pdo->rollBack(); //desfaz a inserção na tabela carrinho
             die('erro ao adicionar item'); 

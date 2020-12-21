@@ -23,8 +23,9 @@ unset($itens['count']);
     <title>Petshop - Meu carrinho</title>
 </head>
 <body>
-
-<!-- Se o usuario estiver logado aparece isso -->
+<?php 
+include '../global_header.php';
+?>
     <h1>Meu carrinho</h1>
     <a href="<?php echo Go::UserController('logout'); ?>">Logout</a><br>
     <a href="<?php echo Go::home('l'); ?>">Home</a>

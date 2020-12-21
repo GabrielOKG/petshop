@@ -13,16 +13,10 @@ include_once '../../../DB/database.ini.php';
 use Model\Carrinho;
 if(isset($_POST['id_produto']) && !empty($_POST['id_produto'])){
 
-    if(isset($_POST['qtd']) && !empty($_POST['qtd'])){
-        $qtd = $_POST['qtd'];
-    }else{
-        $qtd = 1;
-    }
-
     $item = new Carrinho($pdo);
     $id_cliente = $_SESSION['id'];
     $id_produto = $_POST['id_produto'];
-    if($item->adicionar($id_cliente,$id_produto,$qtd) == true){
+    if($item->adicionar($id_cliente,$id_produto) == true){
         echo "<script language='javascript' type='text/javascript'>
         alert('Produto adicionado ao carrinho');window.location.href='". Go::home('l') ."';</script>";
     }else{

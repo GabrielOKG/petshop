@@ -26,41 +26,66 @@ unset($produtos['count']);
     <title>Petshop - Pagina Inicial</title>
 </head>
 <body>
-<?php  if(isset($_SESSION['id'])){?>
+<?php 
+if(isset($_SESSION['id'])){
+ include '../global_header.php';
+?>
 <!-- Se o usuario estiver logado aparece isso -->
-
     <h1>Bem vindo <?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome']; ?> </h1>
-    <a href="<?php echo Go::UserController('logout'); ?>">Logout</a><br>
-    <a href="<?php echo Go::conta('l'); ?>">Minha conta</a><br>
-    <a href="<?php echo Go::carrinho('l'); ?>">Meu Carrinho</a><br>
-<?php }else{ ?>
+<?php }else{ 
+    include '../header.php';
+  ?>
 <!-- Se não isso -->
 <h1> Não Logado </h1>
-<a href="<?php echo Go::UserController('login/l'); ?>">Login</a>
-<br>
-<a href="<?php echo Go::UserController('cadastro/l'); ?>">cadastro</a>
- <?php } ?>
-    <br>
-<form action="" method="GET">
-    <input type="search" name="busca" placeholder="O que você está procurando?">
-    <input type="submit" value="Pesquisar">
-</form>
-<h2> Produtos</h2>
-<span>Foram encontrados <?php echo $totalProd; ?> produtos cadastrados</span><br>
-<?php
-  foreach($produtos as $produto){
-    ?><img src="<?php echo $produto['foto']; ?>" width="200" height="200"><br><br> 
-<?php
-    echo $produto['titulo']. "<br>" ."R$ ".$produto['preco']."0 <br>";
-?>
-    <form action="<?php echo Go::carrinho("controller/add"); ?>" method="POST">
-      <input type="number" name="qtd" placeholder="qtd">
-      <input name="id_produto" value="<?php echo $produto['id']; ?>" type = "hidden">
-      <input type="submit" value="adicionar ao carrinho">
-    </form>
-<?php
-  }
-?>
 
+ <?php } ?>
+
+<div class="col-12" style="margin:0px;padding:15px;">
+<form class="form-inline " action="" method="GET">
+ <div class ="justify-content-center  row">
+  <div class='col-6'>
+    <input class="form-control" type="search" name="busca" placeholder="O que você está procurando?" aria-label="Search">
+    <i class="fas fa-search" aria-hidden="true"></i>
+  </div>
+  <div class='col-2'>
+  <input class="btn btn-primary " type="submit" value="Pesquisar">
+  </div>
+</div>  
+</form>
+</div>
+<!-- <button type="button" class="btn btn-sm btn-outline-secondary">Comprar</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">adicionar ao carrinho</button> -->
+
+<span>&nbsp;&nbsp;Foram encontrados <?php echo $totalProd; ?> produtos cadastrados</span><br>
+  <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+  <?php
+        foreach($produtos as $produto){
+  ?>
+            <div class="col-md-3">
+              <div class="card mb-4 box-shadow">
+                <a href="exibir.php?id=<?php echo $produto['id']; ?>"><img class="card-img-top" src="<?php echo $produto['foto']; ?>" ></a>
+                <div class="card-body">
+                  <p class="card-text"><?php echo $produto['titulo']; ?></p><p style="font-size:22px"><br><?php echo "R$".$produto['preco']."0"; ?></b></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    <form action="<?php echo Go::carrinho("controller/add"); ?>" method="POST">
+                          <input name="id_produto" value="<?php echo $produto['id']; ?>" type = "hidden">
+                          <input type="submit" class="btn btn-sm btn-outline-secondary" value="adicionar ao carrinho">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        <?php
+             }
+        ?>
+         </div>
+         </div>
+         </div>
+        
 </body>
 </html>

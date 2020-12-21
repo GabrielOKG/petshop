@@ -47,6 +47,9 @@ if(!isset($_SESSION['id'])){
     
 </head>
 <body>
+<?php 
+include '../global_header.php';
+?>
     <div class ="container">
         <div class ="justify-content-center align-itens-center row">
             <div class = "col-6" >

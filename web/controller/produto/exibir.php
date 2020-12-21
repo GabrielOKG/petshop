@@ -8,4 +8,7 @@ use Model\Produto;
     $produto = new Produto($pdo);
       return $produto->busca($busca);
     }
-  
+    function exibir($pdo,$id_produto){
+      $produto = new Produto($pdo);
+        return $produto->exibir($id_produto);
+}

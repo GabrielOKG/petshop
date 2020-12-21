@@ -22,10 +22,9 @@ class Go{
         case "loginController":
           return '../../controller/auth/login.php';
         break;
-        // case "atualizar/d": 
-        // break;
-        // case "atualizar/l": 
-        // break;
+        case "atualizaController":
+          return '../../controller/auth/atualiza.php';
+        break;
         case "logout": 
           return '../../controller/auth/logout.php';
         break;

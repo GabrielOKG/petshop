@@ -35,7 +35,7 @@ namespace Model;
 
     function loginUser($email, $senha){
       // Verificando usuario , se email e senha estiverem corretos retorna os dados
-      $sql = "SELECT id,nome,sobrenome,sexo,nascimento,cpf,email FROM cliente WHERE email=:email AND senha=:senha";
+      $sql = "SELECT id,nome,sobrenome,sexo,nascimento,telefone,cpf,email FROM cliente WHERE email=:email AND senha=:senha";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':email', $email);
       $stmt->bindValue(':senha', sha1($senha));
@@ -43,11 +43,19 @@ namespace Model;
       //Armazenando os dados em Session
       if($stmt->rowCount() != 0){
         $dado = $stmt->fetch();
+
+      if($dado['telefone'] ==  null){
+        $telefone = "";
+      }
+      else{
+        $telefone = $dado['telefone'];
+      }
         $_SESSION['id'] = $dado['id'];
         $_SESSION['nome'] = $dado['nome'];
         $_SESSION['sobrenome'] = $dado['sobrenome'];
         $_SESSION['sexo'] = $dado['sexo'];
         $_SESSION['nascimento'] = $dado['nascimento'];
+        $_SESSION['telefone'] = $telefone;
         $_SESSION['cpf'] = $dado['cpf'];
         $_SESSION['email'] = $dado['email'];
         return true;
@@ -55,9 +63,38 @@ namespace Model;
         return false;
       }
     }
-    function atualizarCadastro(){
-      //:TODO
+    function atualizaTelefone($id_cliente,$telefone){
+      $sql = "UPDATE cliente SET telefone=:telefone WHERE id=:id_cliente";
+      $stmt = $this->pdo->prepare($sql);
+      $stmt->BindValue(':telefone',$telefone);
+      $stmt->BindValue(':id_cliente',$id_cliente);
+      if($stmt->execute()){
+        return true;
+      }
+        return false;
     }
+
+    function atualizaEmail($id_cliente,$email){
+      $sql = "UPDATE cliente SET email=:email WHERE id=:id_cliente";
+      $stmt = $this->pdo->prepare($sql);
+      $stmt->BindValue(':email',$email);
+      $stmt->BindValue(':id_cliente',$id_cliente);
+      if($stmt->execute()){
+        return true;
+      }
+        return false;
+    }
+    function atualizaSenha($id_cliente,$senha){
+          $sql = "UPDATE cliente SET senha=:senha WHERE id=:id_cliente";
+          $stmt = $this->pdo->prepare($sql);
+          $stmt->BindValue(':senha',sha1($senha));
+          $stmt->BindValue(':id_cliente',$id_cliente);
+          if($stmt->execute()){
+            return true;
+          }
+            return false;
+        }
+
     static function formatar(){
       //formatando data de nascimento
       $data = date('d/m/Y', strtotime($_SESSION['nascimento']));
@@ -70,6 +107,7 @@ namespace Model;
         'id' => $_SESSION['id'],
         'nome' => $_SESSION['nome'], 
         'sobrenome' => $_SESSION['sobrenome'],
+        'telefone' => $_SESSION['telefone'],
         'nascimento' => $data,
         'sexo' => $sexo,
         'cpf' => $_SESSION['cpf'],

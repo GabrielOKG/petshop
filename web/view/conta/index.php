@@ -20,23 +20,49 @@ $arr = User::formatar();
     <title>Petshop - Pagina Inicial</title>
 </head>
 <body>
-    <h1>Minha Conta</h1>
-    <a href="<?php echo Go::UserController('logout'); ?>">Logout</a>
+<?php 
+include '../global_header.php';
+?>
+   
+   <br>
+    <br><br>
     <br>
-    <a href="<?php echo Go::home('l'); ?>">Home</a>
-    <br>
-    <a href="<?php echo Go::endereco('l')?>">Endereço</a>
-    <br>
-    <a href="<?php echo Go::carrinho('l')?>">Carrinho</a>
-    <br>
-    <br>
-    <p><?php foreach($arr as $dado){
-      echo $dado . " <br>";  //:TODO
-    }
-    ?></p>
-    <a href="atualizarCadastro.php">Atualizar Cadastro</a>
+   
     
+    <div class="row" style="margin:4px;">
+      <div class="col-3">
+          <a disable style="text-decoration:none;color:silver;">Minha conta</a><br>
+          <a href="../endereco" style="text-decoration:none;">Endereço de entrega</a>
+      </div>
+      <div class="col-3">
+
+      <table class="table table-striped table-sm">
+        <tbody>
+            <tr>
+              <td><?php echo "Nome completo: ".$arr['nome'].", ".$arr['sobrenome'] ?></td>
+            </tr> 
+            <tr>
+              <td><?php echo "CPF: ".$arr['cpf']; ?></td>
+            </tr>
+            <tr>
+              <td><?php echo "Data de nascimento: ".$arr['nascimento']; ?></td>
+            </tr> 
+            <tr>
+              <td><?php echo "Telefone: ".$arr['telefone']; ?></td>
+            </tr>
+            <tr>
+              <td><?php echo "Email: ".$arr['email']; ?></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <a href="atualizarCadastro.php" style=text-decoration:none;>Atualizar dados</a>
+      </div>
+    </div>
+
+
 <script>
 </script>
+</body>
 </body>
 </html>

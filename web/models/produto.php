@@ -32,6 +32,21 @@ namespace Model;
           print $e->getMessage();
         }
     }
+    function exibir($id_produto){
+      try{
+        $sql = "SELECT id,titulo,descricao,detalhes,preco,foto FROM produto WHERE id=:id_produto";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->BindValue(':id_produto',$id_produto);
+        $stmt->execute(); 
+        if($stmt->rowCount() == 0){
+          return false;
+        }
+        $arr = $stmt->fetch();
+        return $arr;
+        }catch(PDOException $e){
+          print $e->getMessage();
+        }
+    }
 
 }
 

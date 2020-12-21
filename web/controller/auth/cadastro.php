@@ -37,15 +37,7 @@ if(isset($_POST['nome']) && !empty($_POST['nome']) && isset($_POST['sobrenome'])
         alert('Já existe uma conta com essas informações , tente fazer login');window.location.href='". Go::UserController('cadastro/l') ."';</script>";
     }
 }else{
-//    header(Go::UserController('cadastro/d')); 7
-$nome = $_POST['nome'];
-$sobrenome = $_POST['sobrenome'];
-$nascimento = $_POST['nascimento'];
-$sexo = $_POST['sexo'];
-$cpf = $_POST['cpf'];
-$telefone = $_POST['telefone'];
-$email = $_POST['email'];
-$senha = $_POST['senha'];
+header(Go::UserController('cadastro/d')); 
 }
 
 
