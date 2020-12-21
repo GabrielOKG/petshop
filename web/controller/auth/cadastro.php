@@ -25,7 +25,7 @@ if(isset($_POST['nome']) && !empty($_POST['nome']) && isset($_POST['sobrenome'])
     if($user->cadastrarUser($nome,$sobrenome,$nascimento,$sexo,$cpf,$telefone,$email,$senha) == true){
         if($user->loginUser($email,$senha) == true){
             if(isset($_SESSION['id'])){
-                header(Go::home('d'));
+                header(Go::endereco("novo"));
             }else{
                 header(Go::UserController('login/d'));
             }

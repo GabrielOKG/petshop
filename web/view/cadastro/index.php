@@ -119,11 +119,11 @@ if(isset($_SESSION['id'])){
                         </div>    
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Logar" class="form-control" style="background-color: rgb(22, 16, 16); color:snow;"><br>
+                            <input type="submit" value="Cadastrar" class="form-control" style="background-color: rgb(22, 16, 16); color:snow;"><br>
                         </div>   
                         
                         <div class= "text-center mb-2">
-                        <a href="<?php echo Go::UserController('cadastro/l'); ?>" style="text-decoration:none;" >Casdastro</a>
+                        <a href="<?php echo Go::UserController('login/l'); ?>" style="text-decoration:none;" >Fazer login</a>
                         </div>  
                     </div>                      
                 </form>

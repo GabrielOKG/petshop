@@ -34,7 +34,7 @@ namespace Model;
     }
     function exibir($id_produto){
       try{
-        $sql = "SELECT id,titulo,descricao,detalhes,preco,foto FROM produto WHERE id=:id_produto";
+        $sql = "SELECT * FROM produto WHERE id=:id_produto";
         $stmt = $this->pdo->prepare($sql);
         $stmt->BindValue(':id_produto',$id_produto);
         $stmt->execute(); 
@@ -42,7 +42,22 @@ namespace Model;
           return false;
         }
         $arr = $stmt->fetch();
-        return $arr;
+        $descricao = str_replace(';',"<br>",$arr['descricao']);
+        $a = array(
+          'id' => $arr['id'],
+          'titulo' => $arr['titulo'],
+          'descricao' => $descricao,
+          'preco' => $arr['preco'],
+          'foto' => $arr['foto'],
+          'detalhes' => $arr['detalhes'],
+          'marca' => $arr['marca'],
+          'indicacao' => $arr['indicacao'],
+          'categoria' => $arr['categoria'],
+          'idade' => $arr['idade'],
+          'sabor' => $arr['sabor'],
+          'tipo' => $arr['tipo'],
+        );
+        return $a;
         }catch(PDOException $e){
           print $e->getMessage();
         }

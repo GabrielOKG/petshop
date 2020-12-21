@@ -37,7 +37,9 @@ if(isset($_SESSION['id'])){
             <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="<?php echo $produto['foto']; ?>" >
                 <br>
-            <form action="<?php echo Go::carrinho("controller/add"); ?>" method="POST"> <br>
+               
+            <form action="<?php echo Go::carrinho("controller/add"); ?>" method="POST"> <br> 
+            <p style="font-size:22px;margin:4px;color:#505050;"><b> Por: R$<?php echo $produto['preco']; ?>0</b></p>
               <div class="row">
                 <div class='col-12'>
                 <input name="id_produto" value="<?php echo $produto['id']; ?>" type = "hidden">
@@ -50,10 +52,33 @@ if(isset($_SESSION['id'])){
             <div class="col-md-7">
                 <p style="font-size:24px;"><?php echo $produto['titulo']; ?></p>
                 <p style="font-size:18;"><?php echo $produto['descricao']; ?></p>
-                <br> <p style="font-size:18;"><?php echo $produto['detalhes']; ?></p>
+                <br><p style="font-size:18;"><?php echo $produto['detalhes']; ?></p>
+                <table class="table table-striped table-sm">
+        <tbody>
+            <tr>
+              <td><?php echo "Categoria: ".$produto['categoria']; ?></td>
+            </tr> 
+            <tr>
+              <td><?php echo "Indicação: ".$produto['indicacao']; ?></td>
+            </tr> 
+            <tr>
+              <td><?php echo "Tipo: ".$produto['tipo']; ?></td>
+            </tr> 
+            <tr>
+              <td><?php echo "Idade: ".$produto['idade']; ?></td>
+            </tr> 
+            <tr>
+              <td><?php echo "Sabor: ".$produto['sabor']; ?></td>
+            </tr> 
+            <tr>
+              <td><?php echo "Marca: ".$produto['marca']; ?></td>
+            </tr> 
+          </tbody>
+        </table> 
             </div>
          </div>
          </div>
-         </div>   
+         </div>  
+       
 </body>
 </html>

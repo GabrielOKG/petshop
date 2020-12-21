@@ -98,6 +98,8 @@ class Go{
           return 'location: ../../view/endereco/';
         if($p == 'l')
           return '../../view/endereco/';
+        if($p == 'novo')
+          return 'location: ../../view/endereco/novo.php';
       }
 
 }
