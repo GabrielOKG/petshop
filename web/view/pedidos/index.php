@@ -1,15 +1,15 @@
-<?php 
+<?php
 if (session_status() !== PHP_SESSION_ACTIVE){ //Verificar se a sessão não já está aberta.
     session_start();  
-  } 
+} 
 require '../../../rotas.php'; 
 use Rota\Go;
 if(!isset($_SESSION['id'])){
     header(Go::UserController('login/d'));
 }
 include_once '../../../DB/database.ini.php';
-include Go::ContaController('endereco/mostrarTodos');
-$enderecos = mostrarTodos($pdo);
+include Go::carrinho("controller/exibir");
+$pedidos = mostrarPedidos($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -44,8 +44,8 @@ $enderecos = mostrarTodos($pdo);
     <div class="row" style="margin:4px;">
       <div class="col-3">
       <a href="../conta" style="text-decoration:none;">Minha conta</a><br>
-          <a disable style="text-decoration:none;color:silver;">Endereço de entrega</a><br>
-          <a href="../pedidos" style="text-decoration:none;">Meus pedidos</a>
+        <a href="../endereco" style="text-decoration:none;">Endereço de entrega</a><br>
+        <a disable style="text-decoration:none;color:silver;">Meus pedidos</a>
       </div>
       <div class="col-3">
 

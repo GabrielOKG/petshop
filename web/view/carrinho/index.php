@@ -10,9 +10,9 @@ if(!isset($_SESSION['id'])){
 include_once '../../../DB/database.ini.php';
 include Go::carrinho("controller/exibir");
 $itens = mostrarTodos($pdo);
-$pedidos = mostrarPedidos($pdo);
 $totalItens = $itens['count'];
 unset($itens['count']);
+$preco = 0;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -26,46 +26,101 @@ unset($itens['count']);
 <?php 
 include '../global_header.php';
 ?>
-    <h1>Meu carrinho</h1>
-    <a href="<?php echo Go::UserController('logout'); ?>">Logout</a><br>
-    <a href="<?php echo Go::home('l'); ?>">Home</a>
-    <br><br>
+ 
+<br><br>
+<div class="row" style="margin:10px;padding:10px;">
+    <div class="col-7">
+    
     <?php
     if($totalItens == 0){
-        echo "Nenhum item no carrinho";
-    } 
-    foreach($itens as $item){
-        echo $item['id']."<br>".$item['titulo']."<br>".$item['preco']."0"."<br>";
-    ?>
-    <form action="<?php echo Go::carrinho("controller/editar"); ?>" method="POST">
-        <input type="number" name="qtd" placeholder="<?php echo $item['qtd']; ?>">
-        <input name="id_item" value="<?php echo $item['id']; ?>" type = "hidden">
-        <input type="submit" name="editar" value="Alterar qtd">
-        <input type="submit" name="remover" value="x">
-    </form>
+        ?><div class="container"><?php echo "Nenhum item no carrinho"; ?></div><?php 
+    }else{
+        ?>
+        <div class="container"><table class="">
+        <tbody>
     <?php
+    foreach($itens as $item){
+        $preco += $item['qtd'] * $item['preco'] * $item['desconto'];
+       ?>
+            <tr>
+              <td>
+                <div class="row">
+                    <div class="col-2">
+                        <img src="<?php echo $item['foto']; ?>" width="130">
+                    </div>
+                    <div class="col-6">
+                    <?php echo $item['titulo']; ?><br><br>
+                    R$<?php echo $item['preco'];?>0
+                    <form action="<?php echo Go::carrinho("controller/editar"); ?>" method="POST">
+                    <div class="row">
+                        <div class="col-3">
+                            <input type="number" name="qtd" class="form-control text-center" style="font-size:16px;" placeholder="<?php echo $item['qtd']; ?>">
+                            <input name="id_item" value="<?php echo $item['id']; ?>" type = "hidden">
+                        </div>
+                        <div class="col-6"> 
+                            <input type="submit" class="form-control" style="background-color:silver;color:white;font-size:16px;" name="editar" value="Alterar qtd">
+                        </div>
+                        <div class="col-3">
+                            <input type="submit" class="form-control" style="background-color:#c00;color:white;font-size:16px;" name="remover" value="x">
+                        </div>
+                
+                    </div>    
+                    </form>
+                    </div>
+                    </div>
+            </td>
+            </tr>
+          <?php
     }
     ?>
-<br><br>
+     </tbody>
+        </table></div>
 <?php
-    if($pedidos == false){
-        echo "nenhum pedido ainda";
-        }else{
-            foreach($pedidos as $pedido){
-                echo "Pedido de numero ".$pedido['id']."<br>".$pedido['quando']."<br>R$".$pedido['total']."0<br>";
-                if($pedido['status'] == 0){
-                   echo "Pedido cancelado";
-                }else{
-                    echo "Separando pedido";
-                  ?>
-        <form action="<?php echo Go::carrinho("controller/cancelarPedido"); ?>" method="POST">
-            <input name="id_carrinho" value="<?php echo $pedido['id']; ?>" type = "hidden">
-            <input type="submit" name="cancelar" value="Cancelar Pedido">
-         </form>
-        <?php
-                }
-            }
-        }
-?> 
+    }
+    ?>
+    </div>
+      <div class="col-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">Carrinho</span>
+          <span class="badge bg-secondary rounded-pill"><?php echo $totalItens; ?> </span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <small class="text-muted">Frete</small>
+            </div>
+            <span class="text-muted">Gratis</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <small>Desconto</small>
+            </div>
+            <span class="text-success">R$0.00</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <small>Subtotal</small>
+            </div>
+            <span class="text-success">R$0.00</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (BRL)</span>
+            <strong>R$<?php echo $preco."0"; ?></strong>
+          </li>
+        </ul>
+
+        <!-- <form class="card p-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Cupom de desconto">
+            <button type="submit" class="btn btn-secondary">Validar</button>
+          </div>
+        </form> -->
+
+        <form class="card p-2">
+          <div class="input-group">
+            <button type="submit" class="form-control">Fechar Pedido</button>
+          </div>
+        </form>
+      </div>
 </body>
 </html>

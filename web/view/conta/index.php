@@ -32,14 +32,15 @@ include '../global_header.php';
     <div class="row" style="margin:4px;">
       <div class="col-3">
           <a disable style="text-decoration:none;color:silver;">Minha conta</a><br>
-          <a href="../endereco" style="text-decoration:none;">Endereço de entrega</a>
+          <a href="../endereco" style="text-decoration:none;">Endereço de entrega</a><br>
+          <a href="../pedidos" style="text-decoration:none;">Meus pedidos</a>
       </div>
       <div class="col-3">
 
       <table class="table table-striped table-sm">
         <tbody>
             <tr>
-              <td><?php echo "Nome completo: ".$arr['nome'].", ".$arr['sobrenome'] ?></td>
+              <td><?php echo "Nome completo: ".$arr['nome']." ".$arr['sobrenome'] ?></td>
             </tr> 
             <tr>
               <td><?php echo "CPF: ".$arr['cpf']; ?></td>

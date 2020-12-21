@@ -15,35 +15,34 @@ namespace Model;
         $stmt->BindValue(':id_cliente',$id_cliente);
         $stmt->execute(); 
         $dado = $stmt->fetch();
-        $cr = $dado['id'];
-
         if($stmt->rowCount() == 0){
-          $pdo->beginTransaction(); // inicia uma transação
+          $this->pdo->beginTransaction(); // inicia uma transação
           //Criando um carrinho ativo para o cliente
           $sql = "INSERT INTO carrinho(id_cliente,status) VALUES(:id_cliente,1) RETURNING id ";
           $carrinho = $this->pdo->prepare($sql);
           $carrinho->BindValue(':id_cliente',$id_cliente);
           $carrinho->execute();
           $dado = $carrinho->fetch();
-          $cr = $dado['id'];
+         
           //adicionando item ao carrinho
-          $sql = "INSERT INTO item(id_carrinho,id_produto,qtd) VALUES(id_carrinho,:id_produto,1)";
+          $sql = "INSERT INTO item(id_carrinho,id_produto,qtd) VALUES(:id_carrinho,:id_produto,1)";
           $carrinho = $this->pdo->prepare($sql);
-          $carrinho->BindValue(':id_carrinho',$cr);
+          $carrinho->BindValue(':id_carrinho', $dado['id']);
           $carrinho->BindValue(':id_produto',$id_produto);
           if(!$carrinho->execute()){
-            $pdo->rollBack(); //desfaz a inserção na tabela carrinho
+            $this->pdo->rollBack(); //desfaz a inserção na tabela carrinho
             die('erro ao adicionar item'); 
           }
-          $pdo->commit();
+          $this->pdo->commit();
           return true;
         }else{
+          $cr = $dado['id'];
          //adicionando item ao carrinho
-          $sql = "INSERT INTO item(id_carrinho,id_produto,qtd) VALUES(:id_carrinho,:id_produto,:qtd)";
+          $sql = "INSERT INTO item(id_carrinho,id_produto,qtd) VALUES(:id_carrinho,:id_produto,1)";
           $carrinho = $this->pdo->prepare($sql);
           $carrinho->BindValue(':id_carrinho',$cr);
           $carrinho->BindValue(':id_produto',$id_produto);
-          $carrinho->BindValue(':qtd',$qtd);
+        
           if(!$carrinho->execute()){
             return false; 
           }
@@ -70,7 +69,7 @@ namespace Model;
       return true;
     }
     function getAll($id_cliente){
-    try{$sql = "SELECT I.id,I.qtd,P.titulo,P.preco FROM (
+    try{$sql = "SELECT I.id,I.qtd,P.titulo,P.preco,P.foto,P.desconto FROM (
         (produto as P JOIN item as I ON I.id_produto = P.id) 
         JOIN carrinho as C ON I.id_carrinho = C.id ) WHERE C.id_cliente = :id_cliente";
       $stmt = $this->pdo->prepare($sql);
@@ -84,6 +83,8 @@ namespace Model;
             'titulo' => $dado['titulo'],
             'preco' => $dado['preco'],
             'qtd' => $dado['qtd'],
+            'foto' => $dado['foto'],
+            'desconto' => $dado['desconto'],
           );
           array_push($arr,$a);
         }
