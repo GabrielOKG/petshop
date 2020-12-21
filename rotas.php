@@ -84,6 +84,9 @@ class Go{
           case "controller/editar": 
             return '../../controller/carrinho/editar.php';
           break;
+          case "controller/cancelarPedido": 
+            return '../../controller/carrinho/cancelar.php';
+          break;
         }
       }
       public static function endereco($p){

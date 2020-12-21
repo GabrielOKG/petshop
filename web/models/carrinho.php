@@ -32,8 +32,8 @@ namespace Model;
           $carrinho->BindValue(':id_produto',$id_produto);
           $carrinho->BindValue(':qtd',$qtd);
           if(!$carrinho->execute()){
-            $pdo->rollBack();
-            die('erro ao adicionar item'); //desfaz a inserção na tabela carrinho
+            $pdo->rollBack(); //desfaz a inserção na tabela carrinho
+            die('erro ao adicionar item'); 
           }
           $pdo->commit();
           return true;
@@ -92,7 +92,49 @@ namespace Model;
         print $e->getMessage();
       }
     }
-    
+
+    function fecharPedido($id_carrinho,$total){
+      $sql = "UPDATE carrinho SET status=2,total=:total,quando= current_timestamp WHERE id=:id_carrinho";
+      $stmt = $this->pdo->prepare($sql);
+      $stmt->BindValue(':id_carrinho',$id_carrinho);
+      $stmt->BindValue(':total',$total);
+      if(!$stmt->execute()){
+        return false; 
+      }
+      return true;
+    }
+
+    function cancelarPedido($id_carrinho){
+      $sql = "UPDATE carrinho SET status=0 WHERE id=:id_carrinho";
+      $stmt = $this->pdo->prepare($sql);
+      $stmt->BindValue(':id_carrinho',$id_carrinho);
+      if(!$stmt->execute()){
+        return false; 
+      }
+      return true;
+    }
+
+    function getPedidos($id_cliente){
+        $sql = "SELECT * FROM carrinho WHERE id_cliente=:id_cliente AND NOT status=1";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->BindValue(':id_cliente',$id_cliente);
+        if($stmt->execute()){
+        $arr = array();
+        while($dado = $stmt->fetch(\PDO::FETCH_ASSOC)){
+          date_default_timezone_set('America/Araguaina');
+          $quando = date('d/m/Y h:i:s A',strtotime($dado['quando']));
+          $a = array(
+            'id' => $dado['id'],
+            'status' => $dado['status'],
+            'quando' => $quando,
+            'total' => $dado['total'],
+          );
+          array_push($arr,$a);
+        }
+        return $arr;
+      }
+      return false;
+    }
 }
 
 ?>

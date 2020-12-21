@@ -8,6 +8,11 @@ if(!isset($_SESSION['id'])){
 require '../../models/carrinho.php';
 use Model\Carrinho;
      function mostrarTodos($pdo){
-     $ende = new Carrinho($pdo);
-     return $ende->getAll($_SESSION['id']);
+     $itens = new Carrinho($pdo);
+     return $itens->getAll($_SESSION['id']);
  }
+
+ function mostrarPedidos($pdo){
+    $pedido = new Carrinho($pdo);
+    return $pedido->getPedidos($_SESSION['id']);
+}

@@ -10,6 +10,7 @@ if(!isset($_SESSION['id'])){
 include_once '../../../DB/database.ini.php';
 include Go::carrinho("controller/exibir");
 $itens = mostrarTodos($pdo);
+$pedidos = mostrarPedidos($pdo);
 $totalItens = $itens['count'];
 unset($itens['count']);
 ?>
@@ -44,5 +45,26 @@ unset($itens['count']);
     <?php
     }
     ?>
+<br><br>
+<?php
+    if($pedidos == false){
+        echo "nenhum pedido ainda";
+        }else{
+            foreach($pedidos as $pedido){
+                echo "Pedido de numero ".$pedido['id']."<br>".$pedido['quando']."<br>R$".$pedido['total']."0<br>";
+                if($pedido['status'] == 0){
+                   echo "Pedido cancelado";
+                }else{
+                    echo "Separando pedido";
+                  ?>
+        <form action="<?php echo Go::carrinho("controller/cancelarPedido"); ?>" method="POST">
+            <input name="id_carrinho" value="<?php echo $pedido['id']; ?>" type = "hidden">
+            <input type="submit" name="cancelar" value="Cancelar Pedido">
+         </form>
+        <?php
+                }
+            }
+        }
+?> 
 </body>
 </html>
