@@ -69,7 +69,7 @@ namespace Model;
       return true;
     }
     function getAll($id_cliente){
-    try{$sql = "SELECT I.id,I.qtd,P.titulo,P.preco,P.foto,P.desconto FROM (
+    try{$sql = "SELECT I.id,I.qtd,P.titulo,P.preco,P.foto FROM (
         (produto as P JOIN item as I ON I.id_produto = P.id) 
         JOIN carrinho as C ON I.id_carrinho = C.id ) WHERE C.id_cliente = :id_cliente";
       $stmt = $this->pdo->prepare($sql);
@@ -84,7 +84,7 @@ namespace Model;
             'preco' => $dado['preco'],
             'qtd' => $dado['qtd'],
             'foto' => $dado['foto'],
-            'desconto' => $dado['desconto'],
+           
           );
           array_push($arr,$a);
         }

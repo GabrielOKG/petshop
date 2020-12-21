@@ -10,6 +10,7 @@ if(!isset($_SESSION['id'])){
 include_once '../../../DB/database.ini.php';
 include Go::carrinho("controller/exibir");
 $itens = mostrarTodos($pdo);
+$pedidos = mostrarPedidos($pdo);
 $totalItens = $itens['count'];
 unset($itens['count']);
 $preco = 0;
@@ -40,7 +41,7 @@ include '../global_header.php';
         <tbody>
     <?php
     foreach($itens as $item){
-        $preco += $item['qtd'] * $item['preco'] * $item['desconto'];
+        $preco += $item['qtd'] * $item['preco'];
        ?>
             <tr>
               <td>

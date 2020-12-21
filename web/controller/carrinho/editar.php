@@ -13,10 +13,10 @@ use Model\Carrinho;
 
 if(isset($_POST['id_item']) && !empty($_POST['id_item'])){
     $item = new Carrinho($pdo);
-    if(isset($_POST['editar']) && isset($_POST['qtd']) && isset($_POST['qtd']) && !empty($_POST['qtd'])){
+    if(isset($_POST['editar']) && isset($_POST['qtd']) && isset($_POST['qtd']) && !empty($_POST['qtd']) && $_POST['qtd'] > 0){
         if($item->mudarQtd($_POST['id_item'],$_POST['qtd'])){
             echo "<script language='javascript' type='text/javascript'>
-            alert('Quantidade atualizada');window.location.href='". Go::carrinho('l') ."';</script>";
+            window.location.href='". Go::carrinho('l') ."';</script>";
         }else{
             echo "<script language='javascript' type='text/javascript'>
         alert('Ocorreu um erro, tente novamento mais tarde');window.location.href='". Go::carrinho('l') ."';</script>";
@@ -24,10 +24,10 @@ if(isset($_POST['id_item']) && !empty($_POST['id_item'])){
     echo "<script language='javascript' type='text/javascript'>
     alert('Digite a nova qtd');window.location.href='". Go::carrinho('l') ."';</script>";
     }
-    if(isset($_POST['remover'])){
+    if(isset($_POST['remover']) || $_POST['qtd'] < 0 ){
         if($item->removerItem($_POST['id_item'])){
             echo "<script language='javascript' type='text/javascript'>
-            alert('Item removido');window.location.href='". Go::carrinho('l') ."';</script>";
+            window.location.href='". Go::carrinho('l') ."';</script>";
         }else{
             echo "<script language='javascript' type='text/javascript'>
         alert('Ocorreu um erro, tente novamento mais tarde');window.location.href='". Go::carrinho('l') ."';</script>";
