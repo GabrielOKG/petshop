@@ -42,7 +42,7 @@ $pedidos = mostrarPedidos($pdo);
         
         
             <tr>
-              <td><p>Você não possui endereço cadastrado</td>
+              <td><p>Você não possui pedidos </td>
             </tr> 
     <?php }else{ 
         foreach($pedidos as $pedido){

@@ -69,7 +69,8 @@ namespace Model;
       return true;
     }
     function getAll($id_cliente){
-    try{$sql = "SELECT I.id,I.qtd,I.id_carrinho,P.titulo,P.preco,P.foto FROM (
+    try{
+      $sql = "SELECT I.id,I.qtd,I.id_carrinho,P.titulo,P.preco,P.foto FROM (
         (produto as P JOIN item as I ON I.id_produto = P.id) 
         JOIN carrinho as C ON I.id_carrinho = C.id ) WHERE C.id_cliente = :id_cliente AND C.status = 1";
       $stmt = $this->pdo->prepare($sql);
